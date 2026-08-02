@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saltborne Ledger — E6 Build Calculator</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Haze &middot; Saltborne — Unofficial Tool</p>
+    <h1 class="title">The Saltborne Ledger</h1>
+    <p class="subtitle">A build calculator for Haze: Saltborne's E6 ruleset. Fan-made, not affiliated with the Haze team.</p>
+  </header>
+
+  <div id="loadError"></div>
+
+  <section class="card">
+    <h2 class="h">1. Character</h2>
+    <div class="grid grid-3">
+      <div><label>Character name</label><input type="text" id="charName" placeholder="e.g. Ragnar Emberfist"></div>
+      <div><label>Alignment</label>
+        <select id="alignment">
+          <option>Lawful Good</option><option>Neutral Good</option><option>Chaotic Good</option>
+          <option selected>Lawful Neutral</option><option>True Neutral</option><option>Chaotic Neutral</option>
+          <option>Lawful Evil</option><option>Neutral Evil</option><option>Chaotic Evil</option>
+        </select>
+      </div>
+      <div><label>Deity (optional)</label><input type="text" id="deity" placeholder="e.g. Umberlee"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 class="h">2. Race &amp; Subrace</h2>
+    <p class="h-note">Subraces flagged "Check in-game" have ability mods not fully confirmed against the live wiki — verify before committing.</p>
+    <div class="grid grid-3">
+      <div><label>Race group</label><select id="raceGroup"></select></div>
+      <div><label>Subrace</label><select id="subrace"></select></div>
+      <div><label>ECL modifier</label><input type="text" id="eclDisplay" disabled></div>
+    </div>
+    <div id="raceInfo" class="note-box mt12"></div>
+    <div class="grid grid-6 mt16" id="raceOverrides"></div>
+  </section>
+
+  <section class="card">
+    <h2 class="h">3. Ability Scores</h2>
+    <p class="h-note">Point-buy pool defaults to 30 — change to match your server's actual rule if different.</p>
+    <div class="grid grid-3">
+      <div><label>Point-buy pool</label><input type="number" id="pointPool" value="30" min="10" max="60"></div>
+      <div><label>Points spent</label><input type="text" id="pointsSpent" disabled></div>
+      <div><label>Points remaining</label><input type="text" id="pointsRemaining" disabled></div>
+    </div>
+    <div id="abilityRows" class="mt16"></div>
+    <div id="abilityWarnings"></div>
+  </section>
+
+  <section class="card">
+    <h2 class="h">4. Classes &amp; Level Progression (1–6)</h2>
+    <div style="overflow-x:auto;">
+      <table>
+        <thead><tr>
+          <th>Lv</th><th>Class</th><th class="num">BAB</th><th class="num">Fort</th><th class="num">Ref</th>
+          <th class="num">Will</th><th class="num">HD</th><th class="num">HP</th><th class="num">Skill pts</th><th>Feats this level</th>
+        </tr></thead>
+        <tbody id="levelBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 class="h">5. Feats</h2>
+    <p class="h-note">Eligible-feat counts use the full 587-feat database with real prerequisite checking. Bonus-feat slots (Fighter combat feats, Cleric divine feats, etc.) currently show ALL non-E6 feats you qualify for — narrowing each pool to its exact themed list is a good next data-file improvement.</p>
+    <div id="featSlots"></div>
+  </section>
+
+  <section class="card">
+    <h2 class="h">6. Skills</h2>
+    <div class="grid grid-3 mt12">
+      <div class="summary-stat"><div class="label">Skill pts earned</div><div class="value" id="skillPtsTotal">0</div></div>
+      <div class="summary-stat"><div class="label">Skill pts spent</div><div class="value" id="skillPtsSpent">0</div></div>
+      <div class="summary-stat"><div class="label">Remaining</div><div class="value" id="skillPtsRemaining">0</div></div>
+    </div>
+    <div class="mt16" style="overflow-x:auto;">
+      <table>
+        <thead><tr><th>Skill</th><th class="num">Key</th><th class="num">Type</th><th class="num">Ranks</th><th class="num">Max</th><th class="num">Mod</th><th class="num">Total</th></tr></thead>
+        <tbody id="skillBody"></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2 class="h">7. Summary</h2>
+    <div class="grid grid-3">
+      <div class="summary-stat"><div class="label">BAB</div><div class="value" id="sumBAB">+0</div></div>
+      <div class="summary-stat"><div class="label">Fortitude</div><div class="value" id="sumFort">+0</div></div>
+      <div class="summary-stat"><div class="label">Reflex</div><div class="value" id="sumRef">+0</div></div>
+      <div class="summary-stat"><div class="label">Will</div><div class="value" id="sumWill">+0</div></div>
+      <div class="summary-stat"><div class="label">Hit Points</div><div class="value" id="sumHP">0</div></div>
+      <div class="summary-stat"><div class="label">AC (no gear)</div><div class="value" id="sumAC">10</div></div>
+      <div class="summary-stat"><div class="label">Total ECL</div><div class="value" id="sumECL">6</div></div>
+      <div class="summary-stat"><div class="label">Feats taken</div><div class="value" id="sumFeats">0</div></div>
+    </div>
+  </section>
+
+  <footer class="foot">Fan-made calculator for Haze: Saltborne · data is best-effort and not official.</footer>
+</div>
+
+<script src="js/engine.js"></script>
+<script src="js/data.js"></script>
+<script src="js/ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+/* ============================================================
+   ui.js — renders the app and wires up events. Talks to Engine
+   for all math and to `data` (loaded once at startup) for content.
+   Never does calculation itself — if you find yourself writing
+   BAB or save math in here, it belongs in engine.js instead.
+   ============================================================ */
+
+let DATA = null; // set once by init()
+
+const state = {
+  charName: '',
+  alignment: 'Lawful Neutral',
+  raceGroup: 'Human',
+  subrace: 'Human',
+  raceOverride: {},
+  pointPool: 30,
+  base: { STR: 8, DEX: 8, CON: 8, INT: 8, WIS: 8, CHA: 8 },
+  levels: ['Fighter', 'Fighter', 'Fighter', 'Fighter', 'Fighter', 'Fighter'],
+  featChoices: {},   // slotKey -> feat id
+  skillRanks: {},    // skill name -> ranks
+};
+
+function fmt(n) { return (n >= 0 ? '+' : '') + n; }
+
+async function init() {
+  try {
+    DATA = await loadAllData();
+  } catch (err) {
+    document.getElementById('loadError').style.display = 'block';
+    document.getElementById('loadError').textContent =
+      'Could not load data files. If you just opened this file directly (double-click), that won\'t work — ' +
+      'browsers block local file loading for security. Run a local server instead (see README.md), or view it via GitHub Pages.\n\n' +
+      'Technical error: ' + err.message;
+    return;
+  }
+
+  document.getElementById('raceGroup').innerHTML = Object.keys(DATA.races.raceGroups)
+    .map(r => `<option value="${r}">${r}</option>`).join('');
+
+  bindStaticEvents();
+  renderAll();
+}
+
+function bindStaticEvents() {
+  document.getElementById('raceGroup').addEventListener('change', e => {
+    state.raceGroup = e.target.value;
+    const firstSub = Object.keys(DATA.races.raceGroups[state.raceGroup].subraces)[0];
+    state.subrace = firstSub;
+    state.raceOverride = {};
+    renderAll();
+  });
+  document.getElementById('subrace').addEventListener('change', e => {
+    state.subrace = e.target.value;
+    state.raceOverride = {};
+    renderAll();
+  });
+  document.getElementById('pointPool').addEventListener('input', e => {
+    state.pointPool = parseInt(e.target.value || '30', 10);
+    renderAbilities();
+  });
+}
+
+function currentSubraceDef() {
+  const grp = DATA.races.raceGroups[state.raceGroup];
+  return grp ? grp.subraces[state.subrace] : null;
+}
+
+function finalAbilities() {
+  return Engine.finalAbilityScores(state.base, DATA.races, state.raceGroup, state.subrace, state.raceOverride);
+}
+
+/* ---------------- RACE ---------------- */
+
+function renderRace() {
+  const grp = DATA.races.raceGroups[state.raceGroup];
+  const subSelect = document.getElementById('subrace');
+  const keys = Object.keys(grp.subraces);
+  if (!keys.includes(state.subrace)) state.subrace = keys[0];
+  subSelect.innerHTML = keys.map(k => `<option value="${k}">${k}</option>`).join('');
+  subSelect.value = state.subrace;
+
+  const sr = currentSubraceDef();
+  const box = document.getElementById('raceInfo');
+  const eclBox = document.getElementById('eclDisplay');
+  eclBox.value = sr.ecl ? `+${sr.ecl}` : '+0';
+
+  const verified = sr.verified !== false;
+  box.className = verified ? 'note-box' : 'note-box';
+  const modsText = Object.entries(sr.mods || {}).map(([k, v]) => `${k} ${fmt(v)}`).join(', ') || 'None';
+  const epText = sr.ep ? `<span class="pill warn">${sr.ep} EP</span> ` : '';
+  const verifiedTag = verified ? '' : '<span class="pill warn">Check in-game</span> ';
+  box.innerHTML = `${epText}${verifiedTag}<b>Ability mods:</b> ${modsText}<br><br>` +
+    (sr.traits || []).map(t => `• ${t}`).join('<br>') +
+    (sr.notes ? `<br><br><i>${sr.notes}</i>` : '');
+
+  const ov = document.getElementById('raceOverrides');
+  ov.innerHTML = Engine.ABILS.map(a => `
+    <div><label>${a} override</label>
+    <input type="number" data-ov="${a}" value="${state.raceOverride[a] || 0}"></div>`).join('');
+  ov.querySelectorAll('input').forEach(inp => {
+    inp.addEventListener('input', e => {
+      state.raceOverride[e.target.dataset.ov] = parseInt(e.target.value || '0', 10);
+      renderAll();
+    });
+  });
+}
+
+/* ---------------- ABILITIES ---------------- */
+
+function renderAbilities() {
+  const finals = finalAbilities();
+  const mods = Engine.raceAbilityMods(DATA.races, state.raceGroup, state.subrace);
+  let spent = 0;
+  Engine.ABILS.forEach(a => spent += Engine.pointBuyCost(state.base[a]));
+  document.getElementById('pointsSpent').value = spent;
+  document.getElementById('pointsRemaining').value = state.pointPool - spent;
+
+  const rows = document.getElementById('abilityRows');
+  rows.innerHTML = Engine.ABILS.map(a => {
+    const f = finals[a];
+    const m = Engine.abilityModifier(f);
+    return `<div class="grid" style="grid-template-columns:80px 1fr 40px 40px 50px 50px; align-items:center; padding:4px 0;">
+      <b>${a}</b>
+      <input type="range" min="8" max="18" value="${state.base[a]}" data-abil="${a}">
+      <span class="num">${state.base[a]}</span>
+      <span class="num">${mods[a] ? fmt(mods[a]) : '—'}</span>
+      <span class="num" style="color:var(--brass-bright); font-weight:600;">${f}</span>
+      <span class="num">${fmt(m)}</span>
+    </div>`;
+  }).join('');
+  rows.querySelectorAll('input[type=range]').forEach(inp => {
+    inp.addEventListener('input', e => {
+      state.base[e.target.dataset.abil] = parseInt(e.target.value, 10);
+      renderAll();
+    });
+  });
+
+  const warn = document.getElementById('abilityWarnings');
+  const below10 = Engine.ABILS.filter(a => finals[a] < 10).length;
+  const maxAllowed = state.raceGroup === 'Half-Orc' ? 2 : 1;
+  let w = '';
+  if (below10 > maxAllowed) w += `<div class="warn-line bad">${below10} scores below 10 — house rule allows at most ${maxAllowed} for this race.</div>`;
+  if (spent > state.pointPool) w += `<div class="warn-line bad">Spent ${spent} points but your pool is ${state.pointPool}.</div>`;
+  warn.innerHTML = w;
+}
+
+/* ---------------- LEVEL TABLE ---------------- */
+
+function renderLevels() {
+  const isHuman = state.raceGroup === 'Human';
+  const prog = Engine.computeProgression(DATA.classes.classes, state.levels, isHuman);
+  const finals = finalAbilities();
+  const intMod = Engine.abilityModifier(finals.INT);
+
+  const body = document.getElementById('levelBody');
+  body.innerHTML = prog.map((r, i) => {
+    const clsOptions = Object.keys(DATA.classes.classes)
+      .map(c => `<option value="${c}" ${c === r.cls ? 'selected' : ''}>${c}</option>`).join('');
+    const skillPts = Engine.skillPointsForRow(r, intMod);
+    const chips = r.featSlots.map(s =>
+      `<div class="feat-slot"><span class="tag">${s.pool}${s.source === 'human' ? ' (human)' : ''}</span></div>`
+    ).join('');
+    return `<tr class="stripe">
+      <td><span class="lvl-badge">${r.charLevel}</span></td>
+      <td><select data-lvl="${i}" class="clsSel">${clsOptions}</select></td>
+      <td class="num">${fmt(r.bab)}</td>
+      <td class="num">${fmt(r.fort)}</td>
+      <td class="num">${fmt(r.ref)}</td>
+      <td class="num">${fmt(r.will)}</td>
+      <td class="num">d${r.hitDie}</td>
+      <td class="num">${r.hpThisLevel}</td>
+      <td class="num">${skillPts}</td>
+      <td>${chips || '<span style="color:var(--muted)">—</span>'}</td>
+    </tr>`;
+  }).join('');
+
+  body.querySelectorAll('.clsSel').forEach(sel => {
+    sel.addEventListener('change', e => {
+      state.levels[parseInt(e.target.dataset.lvl, 10)] = e.target.value;
+      renderAll();
+    });
+  });
+
+  return prog;
+}
+
+/* ---------------- FEATS ---------------- */
+
+function buildFeatState(prog, upToCharLevel) {
+  const classLevels = {};
+  let bab = 0;
+  prog.forEach(r => {
+    if (r.charLevel <= upToCharLevel) {
+      classLevels[r.cls] = (classLevels[r.cls] || 0) + 1;
+      bab = r.bab;
+    }
+  });
+  const featIdsTaken = new Set();
+  Object.values(state.featChoices).forEach(id => { if (id) featIdsTaken.add(parseInt(id, 10)); });
+  return { bab, classLevels, finalAbilities: finalAbilities(), featIdsTaken, skillRanks: state.skillRanks };
+}
+
+function renderFeats(prog) {
+  const container = document.getElementById('featSlots');
+  let html = '';
+  prog.forEach(r => {
+    if (!r.featSlots.length) return;
+    html += `<div class="mt16"><span class="pill brass">Level ${r.charLevel}</span></div>`;
+    r.featSlots.forEach((slot, idx) => {
+      const slotKey = `L${r.charLevel}-${slot.pool}-${idx}`;
+      const fstate = buildFeatState(prog, r.charLevel);
+      const eligible = Engine.eligibleFeatsForSlot(DATA.feats.feats, slot.pool, fstate)
+        .sort((a, b) => a.name.localeCompare(b.name));
+      const current = state.featChoices[slotKey] || '';
+      const opts = `<option value="">— choose (${eligible.length} eligible) —</option>` +
+        eligible.map(f => `<option value="${f.id}" ${String(f.id) === String(current) ? 'selected' : ''}>${f.name}</option>`).join('');
+      const chosen = eligible.find(f => String(f.id) === String(current)) ||
+        DATA.feats.feats.find(f => String(f.id) === String(current));
+      html += `<div class="feat-slot">
+        <div class="tag">${slot.pool}${slot.source === 'human' ? ' — human bonus' : ''}</div>
+        <select data-slot="${slotKey}" class="featSel mt8">${opts}</select>
+        ${chosen ? `<div class="h-note" style="white-space:pre-wrap; margin:6px 0 0 0;">${chosen.description}</div>` : ''}
+      </div>`;
+    });
+  });
+  container.innerHTML = html || '<p class="h-note">No feat slots yet — set up your level table above.</p>';
+  container.querySelectorAll('.featSel').forEach(sel => {
+    sel.addEventListener('change', e => {
+      state.featChoices[e.target.dataset.slot] = e.target.value;
+      renderAll();
+    });
+  });
+}
+
+/* ---------------- SKILLS ---------------- */
+
+function renderSkills(prog) {
+  const finals = finalAbilities();
+  const intMod = Engine.abilityModifier(finals.INT);
+  const totalPts = Engine.totalSkillPoints(prog, intMod);
+  const classSkills = Engine.classSkillSet(DATA.classes.classes, state.levels);
+  const charLevel = state.levels.length;
+
+  let spent = 0;
+  const body = document.getElementById('skillBody');
+  body.innerHTML = DATA.skills.skills.map(sk => {
+    const isClass = classSkills.has(sk.name);
+    const max = Engine.maxRanks(charLevel, isClass);
+    const ranks = Math.min(state.skillRanks[sk.name] || 0, max);
+    state.skillRanks[sk.name] = ranks;
+    spent += isClass ? ranks : ranks * 2;
+    const abilMod = Engine.abilityModifier(finals[sk.keyAbility]);
+    return `<tr class="stripe">
+      <td>${sk.name}${sk.unconfirmed ? ' <span class="pill warn">unconfirmed</span>' : ''}</td>
+      <td class="num">${sk.keyAbility}</td>
+      <td class="num">${isClass ? 'Class' : 'Cross'}</td>
+      <td class="num"><input type="number" min="0" max="${max}" value="${ranks}" data-skill="${sk.name}" style="width:50px;text-align:center;"></td>
+      <td class="num">${max}</td>
+      <td class="num">${fmt(abilMod)}</td>
+      <td class="num" style="color:var(--brass-bright);font-weight:600;">${fmt(ranks + abilMod)}</td>
+    </tr>`;
+  }).join('');
+
+  body.querySelectorAll('input[data-skill]').forEach(inp => {
+    inp.addEventListener('input', e => {
+      state.skillRanks[e.target.dataset.skill] = parseInt(e.target.value || '0', 10);
+      renderAll();
+    });
+  });
+
+  document.getElementById('skillPtsTotal').textContent = totalPts;
+  document.getElementById('skillPtsSpent').textContent = spent;
+  const rem = totalPts - spent;
+  const remEl = document.getElementById('skillPtsRemaining');
+  remEl.textContent = rem;
+  remEl.style.color = rem < 0 ? 'var(--bad)' : 'var(--brass-bright)';
+}
+
+/* ---------------- SUMMARY ---------------- */
+
+function renderSummary(prog) {
+  const last = prog[prog.length - 1];
+  const finals = finalAbilities();
+  document.getElementById('sumBAB').textContent = fmt(last.bab);
+  document.getElementById('sumFort').textContent = fmt(last.fort);
+  document.getElementById('sumRef').textContent = fmt(last.ref);
+  document.getElementById('sumWill').textContent = fmt(last.will);
+
+  const conMod = Engine.abilityModifier(finals.CON);
+  const totalHP = prog.reduce((s, r) => s + r.hpThisLevel + conMod, 0);
+  document.getElementById('sumHP').textContent = totalHP;
+  document.getElementById('sumAC').textContent = 10 + Engine.abilityModifier(finals.DEX);
+
+  const sr = currentSubraceDef();
+  document.getElementById('sumECL').textContent = 6 + (sr.ecl || 0);
+  document.getElementById('sumFeats').textContent = Object.values(state.featChoices).filter(Boolean).length;
+}
+
+/* ---------------- MASTER RENDER ---------------- */
+
+function renderAll() {
+  renderRace();
+  renderAbilities();
+  const prog = renderLevels();
+  renderFeats(prog);
+  renderSkills(prog);
+  renderSummary(prog);
+}
+
+window.addEventListener('DOMContentLoaded', init);
