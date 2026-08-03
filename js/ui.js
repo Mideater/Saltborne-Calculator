@@ -10,9 +10,12 @@ let DATA = null; // set once by init()
 const state = {
   charName: '',
   alignment: 'Lawful Neutral',
+  deity: '',
+  clericDomains: [],
   raceGroup: 'Human',
-  subrace: 'Human',
+  subrace: 'Human (unspecified)',
   raceOverride: {},
+  saltborneApplied: false,
   pointPool: 30,
   base: { STR: 8, DEX: 8, CON: 8, INT: 8, WIS: 8, CHA: 8 },
   levels: ['Fighter', 'Fighter', 'Fighter', 'Fighter', 'Fighter', 'Fighter'],
@@ -66,7 +69,64 @@ function currentSubraceDef() {
 }
 
 function finalAbilities() {
-  return Engine.finalAbilityScores(state.base, DATA.races, state.raceGroup, state.subrace, state.raceOverride);
+  return Engine.finalAbilityScores(state.base, DATA.races, state.raceGroup, state.subrace, state.raceOverride, state.saltborneApplied);
+}
+
+/* ---------------- CHARACTER (deity / domains) ---------------- */
+
+function renderCharacter() {
+  const deitySelect = document.getElementById('deity');
+  if (!deitySelect.dataset.populated) {
+    deitySelect.innerHTML = '<option value="">— none —</option>' +
+      DATA.domains.deities.map(([name]) => `<option value="${name}">${name}</option>`).join('');
+    deitySelect.dataset.populated = '1';
+    deitySelect.addEventListener('change', e => {
+      state.deity = e.target.value;
+      state.clericDomains = []; // reset domain picks when deity changes
+      renderAll();
+    });
+  }
+  deitySelect.value = state.deity;
+
+  const isCleric = state.levels.includes('Cleric');
+  const box = document.getElementById('domainBox');
+  if (!isCleric) {
+    box.style.display = 'none';
+    box.innerHTML = '';
+    return;
+  }
+  box.style.display = 'block';
+
+  if (!state.deity) {
+    box.innerHTML = '<p class="h-note">Pick a deity above to choose this Cleric\'s domains.</p>';
+    return;
+  }
+  const deityEntry = DATA.domains.deities.find(([name]) => name === state.deity);
+  const allowedDomains = deityEntry ? deityEntry[2].split(',').map(s => s.trim()) : [];
+
+  box.innerHTML = `<label>Cleric Domains (pick up to 2, matching ${state.deity})</label>
+    <div class="grid grid-3" id="domainChecks"></div>`;
+  const container = document.getElementById('domainChecks');
+  container.innerHTML = allowedDomains.map(d => {
+    const domainInfo = DATA.domains.domains.find(x => x.name === d.replace(/\s*\(.*\)/, ''));
+    const checked = state.clericDomains.includes(d) ? 'checked' : '';
+    const disabled = (!checked && state.clericDomains.length >= 2) ? 'disabled' : '';
+    return `<label style="display:flex; gap:6px; align-items:flex-start; text-transform:none; letter-spacing:0; font-size:13px; cursor:pointer;">
+      <input type="checkbox" data-domain="${d}" ${checked} ${disabled} style="margin-top:3px;">
+      <span>${d}${domainInfo ? `<br><span style="color:var(--muted); font-size:11.5px;">${domainInfo.specialAbility}</span>` : ''}</span>
+    </label>`;
+  }).join('');
+  container.querySelectorAll('input[type=checkbox]').forEach(cb => {
+    cb.addEventListener('change', e => {
+      const d = e.target.dataset.domain;
+      if (e.target.checked) {
+        if (state.clericDomains.length < 2) state.clericDomains.push(d);
+      } else {
+        state.clericDomains = state.clericDomains.filter(x => x !== d);
+      }
+      renderAll();
+    });
+  });
 }
 
 /* ---------------- RACE ---------------- */
@@ -82,16 +142,40 @@ function renderRace() {
   const sr = currentSubraceDef();
   const box = document.getElementById('raceInfo');
   const eclBox = document.getElementById('eclDisplay');
-  eclBox.value = sr.ecl ? `+${sr.ecl}` : '+0';
+
+  if (!sr.saltborneEligible) state.saltborneApplied = false;
+  const totalEcl = Engine.totalEcl(DATA.races, state.raceGroup, state.subrace, state.saltborneApplied);
+  eclBox.value = totalEcl ? `+${totalEcl}` : '+0';
 
   const verified = sr.verified !== false;
-  box.className = verified ? 'note-box' : 'note-box';
   const modsText = Object.entries(sr.mods || {}).map(([k, v]) => `${k} ${fmt(v)}`).join(', ') || 'None';
   const epText = sr.ep ? `<span class="pill warn">${sr.ep} EP</span> ` : '';
   const verifiedTag = verified ? '' : '<span class="pill warn">Check in-game</span> ';
   box.innerHTML = `${epText}${verifiedTag}<b>Ability mods:</b> ${modsText}<br><br>` +
     (sr.traits || []).map(t => `• ${t}`).join('<br>') +
     (sr.notes ? `<br><br><i>${sr.notes}</i>` : '');
+
+  // Saltborne overlay checkbox — only shown when the current subrace qualifies
+  const saltBox = document.getElementById('saltborneBox');
+  if (sr.saltborneEligible) {
+    const st = DATA.races.saltborneTemplate;
+    const stMods = Object.entries(st.mods).map(([k, v]) => `${k} ${fmt(v)}`).join(', ');
+    saltBox.style.display = 'block';
+    saltBox.innerHTML = `
+      <label style="display:flex; align-items:center; gap:8px; cursor:pointer; text-transform:none; letter-spacing:0;">
+        <input type="checkbox" id="saltborneCheck" ${state.saltborneApplied ? 'checked' : ''} style="width:16px;height:16px;">
+        <span>Apply <b>Saltborne</b> template (+${st.ecl} ECL, ${st.ep} EP) — adds ${stMods} on top of the base subrace above</span>
+      </label>
+      ${state.saltborneApplied ? `<div class="h-note" style="margin-top:8px;">${st.traits.map(t => '• ' + t).join('<br>')}<br><br><i>${st.notes}</i></div>` : ''}
+    `;
+    document.getElementById('saltborneCheck').addEventListener('change', e => {
+      state.saltborneApplied = e.target.checked;
+      renderAll();
+    });
+  } else {
+    saltBox.style.display = 'none';
+    saltBox.innerHTML = '';
+  }
 
   const ov = document.getElementById('raceOverrides');
   ov.innerHTML = Engine.ABILS.map(a => `
@@ -119,19 +203,26 @@ function renderAbilities() {
   rows.innerHTML = Engine.ABILS.map(a => {
     const f = finals[a];
     const m = Engine.abilityModifier(f);
-    return `<div class="grid" style="grid-template-columns:80px 1fr 40px 40px 50px 50px; align-items:center; padding:4px 0;">
+    const base = state.base[a];
+    return `<div class="grid" style="grid-template-columns:80px 32px 60px 32px 40px 50px 50px; align-items:center; padding:6px 0; gap:6px;">
       <b>${a}</b>
-      <input type="range" min="8" max="18" value="${state.base[a]}" data-abil="${a}">
-      <span class="num">${state.base[a]}</span>
+      <button type="button" class="btn small" data-step="-1" data-abil="${a}" ${base <= 8 ? 'disabled' : ''}>−</button>
+      <span class="num" style="font-size:16px;">${base}</span>
+      <button type="button" class="btn small" data-step="1" data-abil="${a}" ${base >= 18 ? 'disabled' : ''}>+</button>
       <span class="num">${mods[a] ? fmt(mods[a]) : '—'}</span>
       <span class="num" style="color:var(--brass-bright); font-weight:600;">${f}</span>
       <span class="num">${fmt(m)}</span>
     </div>`;
   }).join('');
-  rows.querySelectorAll('input[type=range]').forEach(inp => {
-    inp.addEventListener('input', e => {
-      state.base[e.target.dataset.abil] = parseInt(e.target.value, 10);
-      renderAll();
+  rows.querySelectorAll('button[data-step]').forEach(btn => {
+    btn.addEventListener('click', e => {
+      const a = e.target.dataset.abil;
+      const delta = parseInt(e.target.dataset.step, 10);
+      const next = state.base[a] + delta;
+      if (next >= 8 && next <= 18) {
+        state.base[a] = next;
+        renderAll();
+      }
     });
   });
 
@@ -197,7 +288,8 @@ function buildFeatState(prog, upToCharLevel) {
   });
   const featIdsTaken = new Set();
   Object.values(state.featChoices).forEach(id => { if (id) featIdsTaken.add(parseInt(id, 10)); });
-  return { bab, classLevels, finalAbilities: finalAbilities(), featIdsTaken, skillRanks: state.skillRanks };
+  const grantedProficiencies = Engine.autoGrantedFeatureNames(DATA.classes.classes, state.levels, upToCharLevel);
+  return { bab, classLevels, finalAbilities: finalAbilities(), featIdsTaken, skillRanks: state.skillRanks, grantedProficiencies };
 }
 
 function renderFeats(prog) {
@@ -209,7 +301,7 @@ function renderFeats(prog) {
     r.featSlots.forEach((slot, idx) => {
       const slotKey = `L${r.charLevel}-${slot.pool}-${idx}`;
       const fstate = buildFeatState(prog, r.charLevel);
-      const eligible = Engine.eligibleFeatsForSlot(DATA.feats.feats, slot.pool, fstate)
+      const eligible = Engine.eligibleFeatsForSlot(DATA.feats.feats, slot.pool, fstate, DATA.bonusPools)
         .sort((a, b) => a.name.localeCompare(b.name));
       const current = state.featChoices[slotKey] || '';
       const opts = `<option value="">— choose (${eligible.length} eligible) —</option>` +
@@ -291,14 +383,15 @@ function renderSummary(prog) {
   document.getElementById('sumHP').textContent = totalHP;
   document.getElementById('sumAC').textContent = 10 + Engine.abilityModifier(finals.DEX);
 
-  const sr = currentSubraceDef();
-  document.getElementById('sumECL').textContent = 6 + (sr.ecl || 0);
+  const totalEcl = Engine.totalEcl(DATA.races, state.raceGroup, state.subrace, state.saltborneApplied);
+  document.getElementById('sumECL').textContent = 6 + totalEcl;
   document.getElementById('sumFeats').textContent = Object.values(state.featChoices).filter(Boolean).length;
 }
 
 /* ---------------- MASTER RENDER ---------------- */
 
 function renderAll() {
+  renderCharacter();
   renderRace();
   renderAbilities();
   const prog = renderLevels();

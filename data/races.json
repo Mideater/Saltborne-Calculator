@@ -3,130 +3,871 @@
   "raceGroups": {
     "Human": {
       "subraces": {
-        "Human": {
+        "Human (Aglarondan)": {
           "mods": {},
           "ecl": 0,
           "ep": null,
           "verified": true,
-          "traits": ["Quick to Master: bonus feat at 1st level"],
-          "notes": "Regional subraces below grant a +2 Skill Affinity to one skill only — no ability score changes."
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Knowledge: Arcane (+2)"
+          ],
+          "notes": "Regional variant \u2014 Aglarondan.",
+          "saltborneEligible": true
+        },
+        "Human (Amnian)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Parry (+2)"
+          ],
+          "notes": "Regional variant \u2014 Amnian.",
+          "saltborneEligible": true
+        },
+        "Human (Bedine)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Animal Empathy (+2)"
+          ],
+          "notes": "Regional variant \u2014 Bedine.",
+          "saltborneEligible": true
+        },
+        "Human (Calishite)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Perform (+2)"
+          ],
+          "notes": "Regional variant \u2014 Calishite.",
+          "saltborneEligible": true
+        },
+        "Human (Chondathan)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Influence (+2)"
+          ],
+          "notes": "Regional variant \u2014 Chondathan.",
+          "saltborneEligible": true
+        },
+        "Human (Chessentan)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Discipline (+2)"
+          ],
+          "notes": "Regional variant \u2014 Chessentan.",
+          "saltborneEligible": true
+        },
+        "Human (Chultan)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Search (+2)"
+          ],
+          "notes": "Regional variant \u2014 Chultan.",
+          "saltborneEligible": true
+        },
+        "Human (Damaran)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Discipline (+2)"
+          ],
+          "notes": "Regional variant \u2014 Damaran.",
+          "saltborneEligible": true
+        },
+        "Human (Dambrathan)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Spot (+2)"
+          ],
+          "notes": "Regional variant \u2014 Dambrathan.",
+          "saltborneEligible": true
+        },
+        "Human (Durpari)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Influence (+2)"
+          ],
+          "notes": "Regional variant \u2014 Durpari.",
+          "saltborneEligible": true
+        },
+        "Human (D'tarig)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Taunt (+2)"
+          ],
+          "notes": "Regional variant \u2014 D'tarig.",
+          "saltborneEligible": true
+        },
+        "Human (Ffolk)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Acrobatics (+2)"
+          ],
+          "notes": "Regional variant \u2014 Ffolk.",
+          "saltborneEligible": true
+        },
+        "Human (Halruaan)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Knowledge: Arcane (+2)"
+          ],
+          "notes": "Regional variant \u2014 Halruaan.",
+          "saltborneEligible": true
+        },
+        "Human (Illuskan)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Survival (+2)"
+          ],
+          "notes": "Regional variant \u2014 Illuskan.",
+          "saltborneEligible": true
+        },
+        "Human (Kara-Tur)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Heal (+2)"
+          ],
+          "notes": "Regional variant \u2014 Kara-Tur.",
+          "saltborneEligible": true
+        },
+        "Human (Lantanna)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Knowledge: History (+2)"
+          ],
+          "notes": "Regional variant \u2014 Lantanna.",
+          "saltborneEligible": true
+        },
+        "Human (Mulan)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Knowledge: History (+2)"
+          ],
+          "notes": "Regional variant \u2014 Mulan.",
+          "saltborneEligible": true
+        },
+        "Human (Nar)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Concentration (+2)"
+          ],
+          "notes": "Regional variant \u2014 Nar.",
+          "saltborneEligible": true
+        },
+        "Human (Rashemi)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Heal (+2)"
+          ],
+          "notes": "Regional variant \u2014 Rashemi.",
+          "saltborneEligible": true
+        },
+        "Human (Shaaran)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Spot (+2)"
+          ],
+          "notes": "Regional variant \u2014 Shaaran.",
+          "saltborneEligible": true
+        },
+        "Human (Tethyrian)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Knowledge: Religion (+2)"
+          ],
+          "notes": "Regional variant \u2014 Tethyrian.",
+          "saltborneEligible": true
+        },
+        "Human (Tuigan)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Animal Empathy (+2)"
+          ],
+          "notes": "Regional variant \u2014 Tuigan.",
+          "saltborneEligible": true
+        },
+        "Human (Turami)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Concentration (+2)"
+          ],
+          "notes": "Regional variant \u2014 Turami.",
+          "saltborneEligible": true
+        },
+        "Human (Ulutian)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Concentration (+2)"
+          ],
+          "notes": "Regional variant \u2014 Ulutian.",
+          "saltborneEligible": true
+        },
+        "Human (Zhent)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level",
+            "Skill Affinity: Perform (+2)"
+          ],
+          "notes": "Regional variant \u2014 Zhent.",
+          "saltborneEligible": true
+        },
+        "Human (unspecified)": {
+          "mods": {},
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Quick to Master: bonus feat at 1st level"
+          ],
+          "notes": "Regional subraces below grant a +2 Skill Affinity to one skill only \u2014 no ability score changes.",
+          "saltborneEligible": true
         }
-      },
-      "regionalSkillAffinities": {
-        "Aglarondan": "Knowledge: Arcane", "Amnian": "Parry", "Bedine": "Animal Empathy",
-        "Calishite": "Perform", "Chondathan": "Influence", "Chessentan": "Discipline",
-        "Chultan": "Search", "Damaran": "Discipline", "Dambrathan": "Spot",
-        "Durpari": "Influence", "D'tarig": "Taunt", "Ffolk": "Acrobatics",
-        "Halruaan": "Knowledge: Arcane", "Illuskan": "Survival", "Kara-Tur": "Heal",
-        "Lantanna": "Knowledge: History", "Mulan": "Knowledge: History", "Nar": "Concentration",
-        "Rashemi": "Heal", "Shaaran": "Spot", "Tethyrian": "Knowledge: Religion",
-        "Tuigan": "Animal Empathy", "Turami": "Concentration", "Ulutian": "Concentration",
-        "Zhent": "Perform"
       }
     },
     "Elf": {
       "subraces": {
-        "Moon Elf": { "mods": {"DEX": 2, "CON": -2}, "ecl": 0, "ep": null, "verified": true,
-          "traits": ["Immune to Sleep", "+2 saves vs enchantment/mind-affecting", "Bonus weapon proficiencies: Longsword, Rapier, Shortbow, Longbow", "Skill Affinity: Listen, Search, Spot (+2 each)", "Keen Senses (auto Search, no move penalty)", "Low-light vision"] },
-        "Sun Elf": { "mods": {"INT": 2, "DEX": -2}, "ecl": 0, "ep": null, "verified": true,
-          "traits": ["Same elf traits as Moon Elf"] },
-        "Wood Elf": { "mods": {"STR": 2, "INT": -2, "CHA": -2}, "ecl": 0, "ep": null, "verified": true,
-          "traits": ["Same elf traits as Moon Elf"] },
-        "Wild Elf": { "mods": {"CON": 2, "INT": -2}, "ecl": 0, "ep": 25, "verified": true,
-          "traits": ["Same elf traits as Moon Elf"] },
-        "Drow": { "mods": {"INT": 2, "CHA": 2}, "ecl": 2, "ep": 250, "verified": true,
-          "traits": ["Darkvision", "Light Sensitivity", "Magical Fortitude", "Same elf traits as Moon Elf", "Subrace power: Darkness 1/day", "Bonus languages: Drow, Undercommon", "Favored class: Wizard (M) / Cleric (F)"],
-          "notes": "Szarkai albino variant costs 325 EP instead of 250." }
+        "Moon Elf": {
+          "mods": {
+            "DEX": 2,
+            "CON": -2
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Immune to Sleep",
+            "+2 saves vs enchantment/mind-affecting",
+            "Bonus weapon proficiencies: Longsword, Rapier, Shortbow, Longbow",
+            "Skill Affinity: Listen, Search, Spot (+2 each)",
+            "Keen Senses (auto Search, no move penalty)",
+            "Low-light vision"
+          ],
+          "saltborneEligible": true
+        },
+        "Sun Elf": {
+          "mods": {
+            "INT": 2,
+            "DEX": -2
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Same elf traits as Moon Elf"
+          ]
+        },
+        "Wood Elf": {
+          "mods": {
+            "STR": 2,
+            "INT": -2,
+            "CHA": -2
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Same elf traits as Moon Elf"
+          ]
+        },
+        "Wild Elf": {
+          "mods": {
+            "CON": 2,
+            "INT": -2
+          },
+          "ecl": 0,
+          "ep": 25,
+          "verified": true,
+          "traits": [
+            "Same elf traits as Moon Elf"
+          ]
+        },
+        "Drow": {
+          "mods": {
+            "INT": 2,
+            "CHA": 2
+          },
+          "ecl": 2,
+          "ep": 250,
+          "verified": true,
+          "traits": [
+            "Darkvision",
+            "Light Sensitivity",
+            "Magical Fortitude",
+            "Same elf traits as Moon Elf",
+            "Subrace power: Darkness 1/day",
+            "Bonus languages: Drow, Undercommon",
+            "Favored class: Wizard (M) / Cleric (F)"
+          ],
+          "notes": "Szarkai albino variant costs 325 EP instead of 250."
+        }
       }
     },
     "Dwarf": {
       "subraces": {
-        "Shield Dwarf": { "mods": {"CON": 2, "CHA": -2}, "ecl": 0, "ep": null, "verified": true,
-          "traits": ["Stonecunning (+2 Search underground)", "Darkvision", "+2 vs poison, +2 vs spells", "+1 attack vs orcs, +1 vs goblinoids", "+4 dodge AC vs giants", "Skill Affinity: Knowledge (general)", "Dwarven waraxe proficiency (if martial weapon prof)"] },
-        "Gold Dwarf": { "mods": {"CHA": 2, "DEX": -2}, "ecl": 0, "ep": null, "verified": true,
-          "traits": ["Same dwarf traits as Shield Dwarf, but Skill Affinity: Knowledge (history) instead of general"] },
-        "Wild Dwarf": { "mods": {"CON": 2, "CHA": -2}, "ecl": 0, "ep": 25, "verified": true,
-          "traits": ["Small stature (+1 attack, +1 AC, +4 stealth/detection, no tower shields/large weapons)", "Use Poison", "Resist Energy (Fire)", "No Stonecunning", "Darkvision, +2 vs poison, +2 vs spells, +1 vs orcs/goblinoids, +4 AC vs giants", "Skill Affinity: Knowledge (history)"] },
-        "Duergar": { "mods": {"CHA": -2}, "ecl": 1, "ep": 250, "verified": true,
-          "traits": ["Darkvision, Light Sensitivity", "Stonecunning, +2 vs poison, +2 vs spells, +1 vs orcs/goblinoids, +4 AC vs giants", "Skill Affinity: Knowledge (history)", "Dwarven waraxe proficiency", "Subrace powers: Invisibility 1/day, Enlarge Person 1/day", "Immune to paralysis, phantasms, poison", "+2 Will vs spells"] }
+        "Shield Dwarf": {
+          "mods": {
+            "CON": 2,
+            "CHA": -2
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Stonecunning (+2 Search underground)",
+            "Darkvision",
+            "+2 vs poison, +2 vs spells",
+            "+1 attack vs orcs, +1 vs goblinoids",
+            "+4 dodge AC vs giants",
+            "Skill Affinity: Knowledge (general)",
+            "Dwarven waraxe proficiency (if martial weapon prof)"
+          ],
+          "saltborneEligible": true
+        },
+        "Gold Dwarf": {
+          "mods": {
+            "CHA": 2,
+            "DEX": -2
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Same dwarf traits as Shield Dwarf, but Skill Affinity: Knowledge (history) instead of general"
+          ]
+        },
+        "Wild Dwarf": {
+          "mods": {
+            "CON": 2,
+            "CHA": -2
+          },
+          "ecl": 0,
+          "ep": 25,
+          "verified": true,
+          "traits": [
+            "Small stature (+1 attack, +1 AC, +4 stealth/detection, no tower shields/large weapons)",
+            "Use Poison",
+            "Resist Energy (Fire)",
+            "No Stonecunning",
+            "Darkvision, +2 vs poison, +2 vs spells, +1 vs orcs/goblinoids, +4 AC vs giants",
+            "Skill Affinity: Knowledge (history)"
+          ]
+        },
+        "Duergar": {
+          "mods": {
+            "CHA": -2
+          },
+          "ecl": 1,
+          "ep": 250,
+          "verified": true,
+          "traits": [
+            "Darkvision, Light Sensitivity",
+            "Stonecunning, +2 vs poison, +2 vs spells, +1 vs orcs/goblinoids, +4 AC vs giants",
+            "Skill Affinity: Knowledge (history)",
+            "Dwarven waraxe proficiency",
+            "Subrace powers: Invisibility 1/day, Enlarge Person 1/day",
+            "Immune to paralysis, phantasms, poison",
+            "+2 Will vs spells"
+          ]
+        }
       }
     },
     "Gnome": {
       "subraces": {
-        "Rock Gnome": { "mods": {"CON": 2, "STR": -2}, "ecl": 0, "ep": null, "verified": true,
-          "traits": ["Craft Focus: Alchemy, Tinkering", "+2 vs illusion/mind-affecting", "+1 attack vs reptilians, +1 vs goblinoids", "+4 dodge AC vs giants", "Skill Affinity: Listen, Concentration", "Spell Focus (Illusion), counts as the feat", "Low-light vision", "Small stature", "Subrace powers: Light 1/day, Prestidigitation 1/day"] },
-        "Forest Gnome": { "mods": {"CHA": -2}, "ecl": 0, "ep": null, "verified": true,
-          "traits": ["Trackless Step", "Same gnome traits as Rock Gnome (no listed subrace powers)"] },
-        "Wild Gnome": { "mods": {"INT": 2, "CHA": -2}, "ecl": 0, "ep": null, "verified": false,
-          "traits": ["+2 vs poison", "Skill Affinity: Animal Empathy, Knowledge (Nature), Survival (+2 each)", "No Craft Focus", "Standard gnome traits otherwise"],
-          "notes": "EP cost shown as locked on overview table but exact EP number not confirmed — check in-game." },
-        "Svirfneblin": { "mods": {"DEX": 2, "WIS": 2, "CON": -2, "CHA": -4}, "ecl": 3, "ep": 250, "verified": true,
-          "traits": ["Darkvision, Stonecunning, Magical Fortitude", "Skill Affinity (Hide), Hardiness, Battle Training vs. Everything, Light Sensitivity", "Craft Focus: Alchemy, Tinkering", "+1 attack vs reptilians/goblinoids, Listen/Concentration affinity, Spell Focus Illusion, low-light, small stature", "Subrace powers: Blindness/Deafness 1/day, Blur 1/day, Disguise Self 1/day"] }
+        "Rock Gnome": {
+          "mods": {
+            "CON": 2,
+            "STR": -2
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Craft Focus: Alchemy, Tinkering",
+            "+2 vs illusion/mind-affecting",
+            "+1 attack vs reptilians, +1 vs goblinoids",
+            "+4 dodge AC vs giants",
+            "Skill Affinity: Listen, Concentration",
+            "Spell Focus (Illusion), counts as the feat",
+            "Low-light vision",
+            "Small stature",
+            "Subrace powers: Light 1/day, Prestidigitation 1/day"
+          ],
+          "saltborneEligible": true
+        },
+        "Forest Gnome": {
+          "mods": {
+            "CHA": -2
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Trackless Step",
+            "Same gnome traits as Rock Gnome (no listed subrace powers)"
+          ]
+        },
+        "Wild Gnome": {
+          "mods": {
+            "INT": 2,
+            "CHA": -2
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": false,
+          "traits": [
+            "+2 vs poison",
+            "Skill Affinity: Animal Empathy, Knowledge (Nature), Survival (+2 each)",
+            "No Craft Focus",
+            "Standard gnome traits otherwise"
+          ],
+          "notes": "EP cost shown as locked on overview table but exact EP number not confirmed \u2014 check in-game."
+        },
+        "Svirfneblin": {
+          "mods": {
+            "DEX": 2,
+            "WIS": 2,
+            "CON": -2,
+            "CHA": -4
+          },
+          "ecl": 3,
+          "ep": 250,
+          "verified": true,
+          "traits": [
+            "Darkvision, Stonecunning, Magical Fortitude",
+            "Skill Affinity (Hide), Hardiness, Battle Training vs. Everything, Light Sensitivity",
+            "Craft Focus: Alchemy, Tinkering",
+            "+1 attack vs reptilians/goblinoids, Listen/Concentration affinity, Spell Focus Illusion, low-light, small stature",
+            "Subrace powers: Blindness/Deafness 1/day, Blur 1/day, Disguise Self 1/day"
+          ]
+        }
       }
     },
     "Halfling": {
       "subraces": {
-        "Lightfoot Halfling": { "mods": {"DEX": 2, "STR": -2}, "ecl": 0, "ep": null, "verified": true,
-          "traits": ["Skill Affinity: Move Silently, Listen (+2 each)", "Lucky (+1 all saves)", "Fearless (+2 vs fear)", "Good Aim (+1 attack w/ thrown weapons)", "Small stature"] },
-        "Strongheart Halfling": { "mods": {"CON": 2, "CHA": -2}, "ecl": 0, "ep": null, "verified": true,
-          "traits": ["Craft Focus: Cooking", "No Lucky", "Skill Affinity: Move Silently, Listen", "Fearless, Good Aim, Small stature"] },
-        "Deep Halfling": { "mods": {"DEX": 2, "STR": -2}, "ecl": 0, "ep": null, "verified": true,
-          "traits": ["Stonecunning, Darkvision", "No Good Aim, no Fearless", "Skill Affinity: Move Silently, Listen", "Lucky, Small stature"] },
-        "Tallfellow Halfling": { "mods": {"DEX": 2, "STR": -2}, "ecl": 0, "ep": null, "verified": true,
-          "traits": ["Skill Affinity: Search, Spot", "No Good Aim", "Skill Affinity: Move Silently, Listen", "Lucky, Fearless, Small stature"] },
-        "Ghostwise Halfling": { "mods": {"WIS": 2, "CHA": -2}, "ecl": 0, "ep": 25, "verified": true,
-          "traits": ["Skill Affinity: Survival", "No Lucky", "Skill Affinity: Move Silently, Listen", "Fearless, Good Aim, Small stature", "Speak without Sound (note: disabled on Narumer / vs telepathy)"] },
-        "Wild Halfling": { "mods": {"DEX": 2, "STR": -2}, "ecl": 0, "ep": 25, "verified": true,
-          "traits": ["Martial Weapon Proficiency, Use Poison, Hardiness vs Poison", "No Lucky, no Fearless, no Good Aim", "Skill Affinity: Move Silently, Listen", "Small stature"] }
+        "Lightfoot Halfling": {
+          "mods": {
+            "DEX": 2,
+            "STR": -2
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Skill Affinity: Move Silently, Listen (+2 each)",
+            "Lucky (+1 all saves)",
+            "Fearless (+2 vs fear)",
+            "Good Aim (+1 attack w/ thrown weapons)",
+            "Small stature"
+          ],
+          "saltborneEligible": true
+        },
+        "Strongheart Halfling": {
+          "mods": {
+            "CON": 2,
+            "CHA": -2
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Craft Focus: Cooking",
+            "No Lucky",
+            "Skill Affinity: Move Silently, Listen",
+            "Fearless, Good Aim, Small stature"
+          ]
+        },
+        "Deep Halfling": {
+          "mods": {
+            "DEX": 2,
+            "STR": -2
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Stonecunning, Darkvision",
+            "No Good Aim, no Fearless",
+            "Skill Affinity: Move Silently, Listen",
+            "Lucky, Small stature"
+          ]
+        },
+        "Tallfellow Halfling": {
+          "mods": {
+            "DEX": 2,
+            "STR": -2
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Skill Affinity: Search, Spot",
+            "No Good Aim",
+            "Skill Affinity: Move Silently, Listen",
+            "Lucky, Fearless, Small stature"
+          ]
+        },
+        "Ghostwise Halfling": {
+          "mods": {
+            "WIS": 2,
+            "CHA": -2
+          },
+          "ecl": 0,
+          "ep": 25,
+          "verified": true,
+          "traits": [
+            "Skill Affinity: Survival",
+            "No Lucky",
+            "Skill Affinity: Move Silently, Listen",
+            "Fearless, Good Aim, Small stature",
+            "Speak without Sound (note: disabled on Narumer / vs telepathy)"
+          ]
+        },
+        "Wild Halfling": {
+          "mods": {
+            "DEX": 2,
+            "STR": -2
+          },
+          "ecl": 0,
+          "ep": 25,
+          "verified": true,
+          "traits": [
+            "Martial Weapon Proficiency, Use Poison, Hardiness vs Poison",
+            "No Lucky, no Fearless, no Good Aim",
+            "Skill Affinity: Move Silently, Listen",
+            "Small stature"
+          ]
+        }
       }
     },
     "Half-Elf": {
       "subraces": {
-        "Half Moon Elf": { "mods": {"DEX": 1}, "ecl": 0, "ep": null, "verified": true,
-          "traits": ["Darkvision (half-elf variant)", "Sleeplessness, +2 vs enchantment", "Partial Skill Affinity: Listen, Search, Spot (+1 each)", "Low-light vision"] },
-        "Half Wood Elf": { "mods": {"STR": 1}, "ecl": 0, "ep": null, "verified": true,
-          "traits": ["Same half-elf traits as Half Moon Elf"] },
-        "Half Sun Elf": { "mods": {"INT": 1}, "ecl": 0, "ep": null, "verified": true,
-          "traits": ["Same half-elf traits as Half Moon Elf"] },
-        "Half Wild Elf": { "mods": {"CON": 1}, "ecl": 0, "ep": 25, "verified": true,
-          "traits": ["Same half-elf traits as Half Moon Elf"] },
-        "Half Drow": { "mods": {"INT": 1, "CHA": 1}, "ecl": 1, "ep": 250, "verified": true,
-          "traits": ["Magical Fortitude", "Darkvision (half-elf variant), Sleeplessness, +2 vs enchantment", "Partial Skill Affinity: Listen, Search, Spot (+1 each)", "Low-light vision", "No light sensitivity (unlike full Drow)"] }
+        "Half Moon Elf": {
+          "mods": {
+            "DEX": 1
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Darkvision (half-elf variant)",
+            "Sleeplessness, +2 vs enchantment",
+            "Partial Skill Affinity: Listen, Search, Spot (+1 each)",
+            "Low-light vision"
+          ],
+          "saltborneEligible": true
+        },
+        "Half Wood Elf": {
+          "mods": {
+            "STR": 1
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Same half-elf traits as Half Moon Elf"
+          ],
+          "saltborneEligible": true
+        },
+        "Half Sun Elf": {
+          "mods": {
+            "INT": 1
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Same half-elf traits as Half Moon Elf"
+          ],
+          "saltborneEligible": true
+        },
+        "Half Wild Elf": {
+          "mods": {
+            "CON": 1
+          },
+          "ecl": 0,
+          "ep": 25,
+          "verified": true,
+          "traits": [
+            "Same half-elf traits as Half Moon Elf"
+          ]
+        },
+        "Half Drow": {
+          "mods": {
+            "INT": 1,
+            "CHA": 1
+          },
+          "ecl": 1,
+          "ep": 250,
+          "verified": true,
+          "traits": [
+            "Magical Fortitude",
+            "Darkvision (half-elf variant), Sleeplessness, +2 vs enchantment",
+            "Partial Skill Affinity: Listen, Search, Spot (+1 each)",
+            "Low-light vision",
+            "No light sensitivity (unlike full Drow)"
+          ]
+        }
       }
     },
     "Half-Orc": {
       "subraces": {
-        "Half-Orc": { "mods": {"STR": 2, "INT": -2, "CHA": -2}, "ecl": 0, "ep": null, "verified": true,
-          "traits": ["Darkvision", "Weapon Proficiency (Orc)", "Skill Affinity: Survival, Taunt, Animal Empathy (+2 each)", "+1 attack vs humans, +1 dodge AC vs humans", "Unrefined Palate"],
-          "notes": "House rule: may have up to two ability scores below 10 at creation (other races allow only one)." },
-        "Mok'Tarak Half-Orc": { "mods": {"STR": -1, "CHA": 2}, "ecl": 0, "ep": null, "verified": true,
-          "traits": ["Same half-orc traits as base Half-Orc"] },
-        "Urgar Half-Orc": { "mods": {"STR": -1, "INT": 2}, "ecl": 0, "ep": null, "verified": true,
-          "traits": ["Same half-orc traits as base Half-Orc"] }
+        "Half-Orc": {
+          "mods": {
+            "STR": 2,
+            "INT": -2,
+            "CHA": -2
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Darkvision",
+            "Weapon Proficiency (Orc)",
+            "Skill Affinity: Survival, Taunt, Animal Empathy (+2 each)",
+            "+1 attack vs humans, +1 dodge AC vs humans",
+            "Unrefined Palate"
+          ],
+          "notes": "House rule: may have up to two ability scores below 10 at creation (other races allow only one).",
+          "saltborneEligible": true
+        },
+        "Mok'Tarak Half-Orc": {
+          "mods": {
+            "STR": -1,
+            "CHA": 2
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Same half-orc traits as base Half-Orc"
+          ]
+        },
+        "Urgar Half-Orc": {
+          "mods": {
+            "STR": -1,
+            "INT": 2
+          },
+          "ecl": 0,
+          "ep": null,
+          "verified": true,
+          "traits": [
+            "Same half-orc traits as base Half-Orc"
+          ]
+        }
       }
     },
     "Plane-touched": {
       "subraces": {
-        "Tiefling": { "mods": {"INT": 2, "DEX": 2, "CHA": -2}, "ecl": 1, "ep": 100, "verified": true,
-          "traits": ["Darkvision", "Subrace power: Darkness 1/day", "Skill Affinity: Hide, Influence", "Resist Energy: Fire, Cold, Electrical", "Appearance: optional tail/horns, glowing orange eyes"] },
-        "Aasimar": { "mods": {"WIS": 2, "CHA": 2}, "ecl": 1, "ep": 150, "verified": true,
-          "traits": ["Darkvision", "Subrace power: Light 1/day", "Skill Affinity: Spot, Listen", "Resist Energy: Acid, Cold, Electrical", "Appearance: glowing white eyes"] },
-        "Fire Genasi": { "mods": {"INT": 2, "CHA": -2}, "ecl": 1, "ep": 100, "verified": true,
-          "traits": ["Darkvision", "Subrace power: Flare 1/day", "Skill Affinity: Taunt, Discipline", "10/- Fire damage reduction, +1 Will save", "Appearance: glowing fiery eyes"] },
-        "Earth Genasi": { "mods": {"STR": 2, "CON": 2, "WIS": -2, "CHA": -2}, "ecl": 1, "ep": 100, "verified": true,
-          "traits": ["Darkvision", "Subrace power: Acid Splash 1/day", "Skill Affinity: Concentration, Discipline", "10/- Acid damage reduction, +1 Fortitude save"] },
-        "Water Genasi": { "mods": {"WIS": 2, "CON": 2, "CHA": -2}, "ecl": 1, "ep": 100, "verified": true,
-          "traits": ["Darkvision", "Subrace power: Ray of Frost 1/day", "Skill Affinity: Concentration, Acrobatics", "10/- Cold damage reduction", "Immune to drowning"] },
-        "Air Genasi": { "mods": {"INT": 2, "DEX": 2, "CHA": -2}, "ecl": 1, "ep": 100, "verified": true,
-          "traits": ["Darkvision", "Subrace power: Electric Jolt 1/day", "Skill Affinity: Concentration, Acrobatics", "10/- Electrical damage reduction, +1 Reflex save", "Immune to Cloudkill, Stinking Cloud", "Appearance: glowing white eyes"] }
-      }
-    },
-    "Template": {
-      "subraces": {
-        "Saltborne": { "mods": {"STR": 2}, "ecl": 1, "ep": 150, "verified": true,
-          "traits": ["Applied on top of a non-EP base race (Human, any Half-Elf, Half-Orc, Moon Elf, Shield Dwarf, Rock Gnome, or Lightfoot Halfling) — keeps that race's stats/traits plus this", "Cannot combine with a picked subrace's own bonuses (e.g. 'Saltborne Sun Elf' only gets Moon Elf base stats + Saltborne)", "Skill Affinity: Survival", "Subrace power: Crushing Deluge 1/day", "5/- Negative Energy damage reduction"],
-          "notes": "STR capped at 20 at creation. Flavor text implies an additional mental malus but it's not numerically confirmed — check in-game before assuming a penalty exists." }
+        "Tiefling": {
+          "mods": {
+            "INT": 2,
+            "DEX": 2,
+            "CHA": -2
+          },
+          "ecl": 1,
+          "ep": 100,
+          "verified": true,
+          "traits": [
+            "Darkvision",
+            "Subrace power: Darkness 1/day",
+            "Skill Affinity: Hide, Influence",
+            "Resist Energy: Fire, Cold, Electrical",
+            "Appearance: optional tail/horns, glowing orange eyes"
+          ]
+        },
+        "Aasimar": {
+          "mods": {
+            "WIS": 2,
+            "CHA": 2
+          },
+          "ecl": 1,
+          "ep": 150,
+          "verified": true,
+          "traits": [
+            "Darkvision",
+            "Subrace power: Light 1/day",
+            "Skill Affinity: Spot, Listen",
+            "Resist Energy: Acid, Cold, Electrical",
+            "Appearance: glowing white eyes"
+          ]
+        },
+        "Fire Genasi": {
+          "mods": {
+            "INT": 2,
+            "CHA": -2
+          },
+          "ecl": 1,
+          "ep": 100,
+          "verified": true,
+          "traits": [
+            "Darkvision",
+            "Subrace power: Flare 1/day",
+            "Skill Affinity: Taunt, Discipline",
+            "10/- Fire damage reduction, +1 Will save",
+            "Appearance: glowing fiery eyes"
+          ]
+        },
+        "Earth Genasi": {
+          "mods": {
+            "STR": 2,
+            "CON": 2,
+            "WIS": -2,
+            "CHA": -2
+          },
+          "ecl": 1,
+          "ep": 100,
+          "verified": true,
+          "traits": [
+            "Darkvision",
+            "Subrace power: Acid Splash 1/day",
+            "Skill Affinity: Concentration, Discipline",
+            "10/- Acid damage reduction, +1 Fortitude save"
+          ]
+        },
+        "Water Genasi": {
+          "mods": {
+            "WIS": 2,
+            "CON": 2,
+            "CHA": -2
+          },
+          "ecl": 1,
+          "ep": 100,
+          "verified": true,
+          "traits": [
+            "Darkvision",
+            "Subrace power: Ray of Frost 1/day",
+            "Skill Affinity: Concentration, Acrobatics",
+            "10/- Cold damage reduction",
+            "Immune to drowning"
+          ]
+        },
+        "Air Genasi": {
+          "mods": {
+            "INT": 2,
+            "DEX": 2,
+            "CHA": -2
+          },
+          "ecl": 1,
+          "ep": 100,
+          "verified": true,
+          "traits": [
+            "Darkvision",
+            "Subrace power: Electric Jolt 1/day",
+            "Skill Affinity: Concentration, Acrobatics",
+            "10/- Electrical damage reduction, +1 Reflex save",
+            "Immune to Cloudkill, Stinking Cloud",
+            "Appearance: glowing white eyes"
+          ]
+        }
       }
     }
+  },
+  "saltborneTemplate": {
+    "mods": {
+      "STR": 2
+    },
+    "ecl": 1,
+    "ep": 150,
+    "verified": true,
+    "traits": [
+      "Applied on top of a non-EP base race (Human, any Half-Elf, Half-Orc, Moon Elf, Shield Dwarf, Rock Gnome, or Lightfoot Halfling) \u2014 keeps that race's stats/traits plus this",
+      "Cannot combine with a picked subrace's own bonuses (e.g. 'Saltborne Sun Elf' only gets Moon Elf base stats + Saltborne)",
+      "Skill Affinity: Survival",
+      "Subrace power: Crushing Deluge 1/day",
+      "5/- Negative Energy damage reduction"
+    ],
+    "notes": "STR capped at 20 at creation. Flavor text implies an additional mental malus but it's not numerically confirmed \u2014 check in-game before assuming a penalty exists. Only selectable on subraces flagged saltborneEligible:true \u2014 applying it uses the BASE subrace's stats plus these, never a picked subrace's own special bonuses (e.g. picking 'Saltborne' over Sun Elf still only gives you Moon Elf's stats, not Sun Elf's)."
   }
 }

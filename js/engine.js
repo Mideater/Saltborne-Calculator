@@ -31,13 +31,22 @@ const Engine = (() => {
     return sr.mods || {};
   }
 
-  function finalAbilityScores(baseScores, racesData, raceGroup, subrace, overrides = {}) {
-    const mods = raceAbilityMods(racesData, raceGroup, subrace);
+  function finalAbilityScores(baseScores, racesData, raceGroup, subrace, overrides = {}, saltborneApplied = false) {
+    const raceMods = raceAbilityMods(racesData, raceGroup, subrace);
+    const saltMods = (saltborneApplied && racesData.saltborneTemplate) ? racesData.saltborneTemplate.mods : {};
     const out = {};
     ABILS.forEach(a => {
-      out[a] = baseScores[a] + (mods[a] || 0) + (overrides[a] || 0);
+      out[a] = baseScores[a] + (raceMods[a] || 0) + (saltMods[a] || 0) + (overrides[a] || 0);
     });
     return out;
+  }
+
+  function totalEcl(racesData, raceGroup, subrace, saltborneApplied) {
+    const grp = racesData.raceGroups[raceGroup];
+    const sr = grp ? grp.subraces[subrace] : null;
+    const baseEcl = sr ? (sr.ecl || 0) : 0;
+    const saltEcl = (saltborneApplied && racesData.saltborneTemplate) ? (racesData.saltborneTemplate.ecl || 0) : 0;
+    return baseEcl + saltEcl;
   }
 
   // ---- BAB / saves ----
@@ -168,6 +177,7 @@ const Engine = (() => {
 
     if (pr.level_class) {
       const have = state.classLevels[pr.level_class] || 0;
+      if (have < 1) return false; // must have AT LEAST 1 level in that class, even if no specific level number given
       if (pr.level != null && have < pr.level) return false;
       if (pr.max_level != null && have > pr.max_level) return false;
     } else if (pr.level != null) {
@@ -197,32 +207,82 @@ const Engine = (() => {
    * Filters the full feats list down to what's eligible for a given slot.
    * featsData = the .feats array from feats.json
    * slotPool = the "pool" string from a featSlot (e.g. 'general', 'fighterCombat', 'clericDivine')
-   * Pool-to-category mapping is intentionally loose right now — see poolMatchesCategory.
+   * bonusPoolsData = the parsed bonus-pools.json
+   * state = same shape as meetsPrereqs expects, PLUS:
+   *   state.grantedProficiencies: Set<string> of feat names already auto-granted
+   *   by classes taken so far (so they don't show up as "new" choices)
    */
-  function eligibleFeatsForSlot(featsData, slotPool, state) {
+  function eligibleFeatsForSlot(featsData, slotPool, state, bonusPoolsData) {
+    // Auto-granted features (proficiencies, Turn Undead, etc.) count toward
+    // OTHER feats' prerequisites even though they were never picked from a slot.
+    const effectiveFeatIds = state.grantedProficiencies
+      ? new Set([...state.featIdsTaken, ...autoGrantedFeatIds(featsData, state.grantedProficiencies)])
+      : state.featIdsTaken;
+    const effectiveState = { ...state, featIdsTaken: effectiveFeatIds };
+
     return featsData.filter(f => {
       if (f.isGroup) return false;   // groups are headers; their members are separate entries
       if (f.isE6Only) return false;  // not available during 1-6 leveling
-      if (state.featIdsTaken.has(f.id)) return false;
-      if (!poolMatchesCategory(slotPool, f)) return false;
-      return meetsPrereqs(f, state);
+      if (effectiveFeatIds.has(f.id)) return false; // already have it (picked OR auto-granted)
+      if (state.grantedProficiencies && state.grantedProficiencies.has(f.name)) return false;
+      if (!poolMatchesCategory(slotPool, f, bonusPoolsData)) return false;
+      return meetsPrereqs(f, effectiveState);
     });
   }
 
-  function poolMatchesCategory(pool, feat) {
-    if (pool === 'general') return true; // any non-E6 feat can fill a general slot
-    // Everything else: caller should further narrow using feat.category / feat.name
-    // as needed for the specific bonus-feat pool (rage list, divine list, etc.)
-    // This is deliberately permissive — tighten per-pool as you confirm exact lists.
-    return true;
+  function poolMatchesCategory(pool, feat, bonusPoolsData) {
+    if (!bonusPoolsData) return true; // safety fallback if data failed to load
+
+    if (pool === 'general') {
+      return bonusPoolsData.generalPoolCategories.includes(feat.category);
+    }
+
+    const def = bonusPoolsData.pools[pool];
+    if (!def) return false; // unknown pool -> show nothing rather than everything
+
+    if (def.categories && def.categories.includes(feat.category)) return true;
+    if (def.names && def.names.includes(feat.name)) return true;
+    if (def.namePrefixes && def.namePrefixes.some(p => feat.name.startsWith(p))) return true;
+    return false;
+  }
+
+  /**
+   * Every feat name that's already automatically granted (not chosen) by the
+   * classes taken so far — proficiencies AND automatic class features like
+   * Turn Undead, Barbarian Fast Movement, Monk AC Bonus, etc. Union across
+   * ALL classes in the level plan taken up to this point.
+   */
+  function autoGrantedFeatureNames(classesData, levelPlan, upToCharLevel) {
+    const set = new Set();
+    levelPlan.slice(0, upToCharLevel).forEach(cls => {
+      const def = classesData[cls];
+      if (!def) return;
+      (def.proficiencyGrants || []).forEach(name => set.add(name));
+      (def.autoFeatures || []).forEach(name => set.add(name));
+    });
+    return set;
+  }
+  // Old name kept as an alias so nothing else has to change.
+  const grantedProficiencies = autoGrantedFeatureNames;
+
+  /**
+   * Looks up feat ids by name for every auto-granted feature, so they can be
+   * merged into featIdsTaken — an auto-granted Turn Undead should satisfy
+   * another feat's "requires Turn Undead" prerequisite exactly as if it had
+   * been picked from a slot.
+   */
+  function autoGrantedFeatIds(featsData, autoGrantedNames) {
+    const ids = new Set();
+    featsData.forEach(f => { if (autoGrantedNames.has(f.name)) ids.add(f.id); });
+    return ids;
   }
 
   return {
     ABILS, PB_COST,
     abilityModifier, pointBuyCost,
-    raceAbilityMods, finalAbilityScores,
+    raceAbilityMods, finalAbilityScores, totalEcl,
     babForLevel, saveForLevel, computeProgression,
     skillPointsForRow, totalSkillPoints, maxRanks, classSkillSet,
-    meetsPrereqs, eligibleFeatsForSlot,
+    meetsPrereqs, eligibleFeatsForSlot, poolMatchesCategory, autoGrantedFeatureNames, autoGrantedFeatIds, grantedProficiencies,
   };
 })();

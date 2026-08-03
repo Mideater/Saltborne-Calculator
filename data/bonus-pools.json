@@ -1,0 +1,40 @@
+{
+  "_comment": "The raw feat export has almost no real prereq data on 'Class & Racial' category feats (they're granted by the game's internal class tables, not by the prereqs shown here) — that's WHY a Fighter's general slot could show Ranger-only feats before this file existed. Every pool below is deliberately curated by hand against the real feat names in feats.json, verified during this session. 'categories' = feat.category values that are broadly allowed in this pool (e.g. any Combat feat for a Fighter). 'names' = exact additional feat names to allow. 'namePrefixes' = for feat families with Initiation/Proficiency/Mastery style variants, matches any feat name starting with this string. The 'general' pool (levels 1/3/6 + human bonus) intentionally excludes the whole 'Class & Racial' category — that category is ONLY reachable through these named bonus pools, which is what stops racial traits and other classes' chassis features from leaking into a general feat choice.",
+  "generalPoolCategories": ["Active Combat", "Combat", "Defensive", "General", "Magical"],
+  "pools": {
+    "fighterCombat": {
+      "categories": ["Combat", "Active Combat"],
+      "names": ["Bone-Crusher Technique", "Charismatic Defender", "Commander's Rally", "Heroic Figure", "Inspiring Presence", "Defensive Stance"]
+    },
+    "clericDivine": {
+      "names": ["Divine Bolt", "Divine Conduit I", "Divine Conduit II", "Divine Conduit III", "Divine Rebuke", "Divine Vigor", "Faith Healing", "Sacred Purification", "Litany of the Faithful", "Summoner's Yoke", "Blessed be the Vestments", "Sacred Ward", "Gospel of the Blades", "False Faith", "Faith be Our Shield", "Star Crossed Blessings", "Gospel of the Wayward", "Gospel of Stone", "Gospel of Thunder"],
+      "namePrefixes": ["Armor Proficiency"]
+    },
+    "barbarianRage": {
+      "names": ["Barbarian Rage (Berserker Rage)", "Barbarian Rage (Frenzied Rage)", "Barbarian Rage (Iron Rage)", "Barbarian Rage (Mystic Rage)", "Barbarian Rage (Rage of the Predator)", "Barbarian Warcry", "Skaald's Rage", "Extend Rage", "Extra Rage", "Ironhide Resilience"]
+    },
+    "rangerCombat": {
+      "names": ["Ambidexterity", "Two-Weapon Fighting", "Point Blank Shot", "Rapid Shot", "Called Shot", "Weapon Finesse", "Stealthy", "Zen Archery", "Green Thumb", "Vermin Heart", "Hunter", "Nature's Companion", "Primevale Bond"]
+    },
+    "rogueTechnique": {
+      "names": ["Two-Weapon Fighting", "Ambidexterity", "Opportunist", "Crippling Strike", "Defensive Roll", "Skill Mastery", "Shadowmelder", "Lock Savant", "Evasive Maneuver", "Dagger Specialist", "Many-Faces", "Arcane Trickster", "Knife Thrower", "Pickpocket Prodigy", "Eavesdropper", "Underground Medic", "Swashbuckler", "Rogue Dash", "Crossbow Sniper"]
+    },
+    "monkPathOrTech": {
+      "names": ["Two-Weapon Fighting", "Ambidexterity", "Extra Ki", "Dodge", "Cleave", "Mobility", "Evasion"],
+      "namePrefixes": ["Arcane Fist Path", "Drunken Master Path", "Scarred Monk Path", "Stormspeaker Monk Path", "Sun Soul Monk Path", "Twin Fangs Path", "Way of the Shadows Path"]
+    },
+    "paladinDoctrine": {
+      "namePrefixes": ["Doctrine of Chivalry -", "Doctrine of Knowledge -", "Doctrine of Nature -", "Doctrine of Rejuvenation -", "Doctrine of Righteousness -"]
+    },
+    "druidLevel5": {
+      "names": ["Wild Shape", "Wild Shape (Minor)", "Vermin Shape", "Vermin Shape (Minor)", "Spirit Link", "Hearthtree", "Pulse of the Grove", "Spiritbark", "Beastmaster"]
+    },
+    "wizardItemOrMetamagic": {
+      "names": ["Empower Spell", "Extend Spell", "Silent Spell", "Still Spell", "Maximize Spell", "Quicken Spell"],
+      "notes": "No item-creation feats exist in the data at all — Haze's CXP-based scroll system (see Wizard class notes) apparently replaces that path entirely, so this pool is metamagic-only."
+    },
+    "commonerPath": {
+      "names": ["Natural Crafter", "Masterful Crafter", "Craft Focus (Alchemy)", "Craft Focus (Blacksmithing)", "Craft Focus (Cooking)", "Craft Focus (Leatherworking)", "Craft Focus (Tinkering)", "Craft Focus (Woodcrafting)", "Clinical Mind", "Clinical Confidence", "Clinical Pragmatism", "Clinical Mastery", "Chirurgeon", "Chirurgeon's Resourcefulness"]
+    }
+  }
+}

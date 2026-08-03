@@ -12,6 +12,7 @@ async function loadAllData() {
     skills: 'data/skills.json',
     domains: 'data/domains.json',
     invocations: 'data/invocations.json',
+    bonusPools: 'data/bonus-pools.json',
   };
 
   const entries = await Promise.all(

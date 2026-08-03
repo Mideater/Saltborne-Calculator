@@ -28,8 +28,9 @@
           <option>Lawful Evil</option><option>Neutral Evil</option><option>Chaotic Evil</option>
         </select>
       </div>
-      <div><label>Deity (optional)</label><input type="text" id="deity" placeholder="e.g. Umberlee"></div>
+      <div><label>Deity (optional)</label><select id="deity"><option value="">— none —</option></select></div>
     </div>
+    <div id="domainBox" class="mt16" style="display:none;"></div>
   </section>
 
   <section class="card">
@@ -41,6 +42,7 @@
       <div><label>ECL modifier</label><input type="text" id="eclDisplay" disabled></div>
     </div>
     <div id="raceInfo" class="note-box mt12"></div>
+    <div id="saltborneBox" class="note-box mt12" style="display:none;"></div>
     <div class="grid grid-6 mt16" id="raceOverrides"></div>
   </section>
 

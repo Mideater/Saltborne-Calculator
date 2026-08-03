@@ -6,15 +6,49 @@
       "alignmentRestriction": "Any Non-Lawful",
       "hitDie": 12,
       "bab": "full",
-      "saves": { "fort": "g", "ref": "p", "will": "p" },
+      "saves": {
+        "fort": "g",
+        "ref": "p",
+        "will": "p"
+      },
       "skillPoints": 5,
-      "classSkills": ["Animal Empathy","Craft Armor","Craft Trap","Craft Weapon","Discipline","Heal","Intimidate","Listen","Parry","Ride","Spot","Survival","Swim","Taunt"],
-      "bonusFeatLevels": { "levels": [3, 6], "pool": "barbarianRage" },
+      "classSkills": [
+        "Animal Empathy",
+        "Craft Armor",
+        "Craft Trap",
+        "Craft Weapon",
+        "Discipline",
+        "Heal",
+        "Intimidate",
+        "Listen",
+        "Parry",
+        "Ride",
+        "Spot",
+        "Survival",
+        "Swim",
+        "Taunt"
+      ],
+      "bonusFeatLevels": {
+        "levels": [
+          3,
+          6
+        ],
+        "pool": "barbarianRage"
+      },
       "proficiencies": "Armor: Light, Medium. Shields: except Tower. Weapons: Martial, Simple.",
       "features": [
         "Rage grants Damage Reduction = Barbarian level, absorbing 5x Barbarian level total, capping at level 5 (DR 5/+1, 25 HP); becomes DR 5/+2 at level 6.",
         "Cannot rage in heavy armor or with a Tower Shield.",
         "Rage Recovery: taking 3+ HP damage triggers a Fortitude save (DC 30 minus damage taken, min DC 10) to regain a spent rage charge."
+      ],
+      "proficiencyGrants": [
+        "Armor Proficiency (light)",
+        "Armor Proficiency (medium)",
+        "Weapon Proficiency (martial)",
+        "Weapon Proficiency (simple)"
+      ],
+      "autoFeatures": [
+        "Barbarian Fast Movement"
       ]
     },
     "Bard": {
@@ -22,19 +56,60 @@
       "alignmentRestriction": "Any Non-Lawful",
       "hitDie": 6,
       "bab": "3/4",
-      "saves": { "fort": "p", "ref": "g", "will": "g" },
+      "saves": {
+        "fort": "p",
+        "ref": "g",
+        "will": "g"
+      },
       "skillPoints": 8,
-      "classSkills": ["Alchemy","Appraise","Bluff","Concentration","Craft Armor","Craft Trap","Craft Weapon","Discipline","Disable Trap","Hide","Listen","Lore","Move Silently","Parry","Perform","Persuade","Pick Pocket","Search","Spellcraft","Spot","Tumble","Use Magic Device"],
-      "bonusFeatLevels": { "levels": [], "pool": null },
+      "classSkills": [
+        "Alchemy",
+        "Appraise",
+        "Bluff",
+        "Concentration",
+        "Craft Armor",
+        "Craft Trap",
+        "Craft Weapon",
+        "Discipline",
+        "Disable Trap",
+        "Hide",
+        "Listen",
+        "Lore",
+        "Move Silently",
+        "Parry",
+        "Perform",
+        "Persuade",
+        "Pick Pocket",
+        "Search",
+        "Spellcraft",
+        "Spot",
+        "Tumble",
+        "Use Magic Device"
+      ],
+      "bonusFeatLevels": {
+        "levels": [],
+        "pool": null
+      },
       "proficiencies": "Armor: Light, Medium. Shields: except Tower. Weapons: Simple + Bard weapon proficiency (longsword, rapier, sap, short sword, shortbow, whip) at level 1.",
       "spellcasting": "Arcane, Charisma-based, spontaneous",
-      "songChoiceLevels": [2, 3, 5],
+      "songChoiceLevels": [
+        2,
+        3,
+        5
+      ],
       "features": [
         "Gets Battle Caster (Trained) free at level 1.",
-        "Bard Song reworked as \"Saltborne's Sonata\" — duration 1 round per modified Perform rank.",
+        "Bard Song reworked as \"Saltborne's Sonata\" \u2014 duration 1 round per modified Perform rank.",
         "Additional song choices at Bard levels 2, 3, 5 from: Dissonant Chord, Dryad's Ditty, Gwaerim's Glee, Kal'ahn'dur's Call, Mistwood's Maddening Tune, Elidion's Four Seasons, Requiem for the Wode, Lilly's Alluring Lullaby (EP), Ulrin's Warsong (EP).",
-        "Songs do not stack — a new song replaces the old one's effect."
-      ]
+        "Songs do not stack \u2014 a new song replaces the old one's effect."
+      ],
+      "proficiencyGrants": [
+        "Armor Proficiency (light)",
+        "Armor Proficiency (medium)",
+        "Weapon Proficiency (simple)",
+        "Weapon Proficiency (bard)"
+      ],
+      "autoFeatures": []
     },
     "Cleric": {
       "epLocked": true,
@@ -42,18 +117,44 @@
       "hitDie": 8,
       "bab": "1/2",
       "babWithDivineVigor": "1/2 plus feat bonus (see Divine Vigor feat)",
-      "saves": { "fort": "g", "ref": "p", "will": "g" },
+      "saves": {
+        "fort": "g",
+        "ref": "p",
+        "will": "g"
+      },
       "skillPoints": 3,
-      "classSkills": ["Concentration","Craft Armor","Craft Trap","Craft Weapon","Discipline","Heal","Lore","Parry","Persuade","Spellcraft"],
-      "bonusFeatLevels": { "levels": [1, 2, 3], "pool": "clericDivine" },
-      "proficiencies": "Armor: none by default (Robes only) — armor proficiency must be taken as a bonus feat. Weapons: Simple.",
+      "classSkills": [
+        "Concentration",
+        "Craft Armor",
+        "Craft Trap",
+        "Craft Weapon",
+        "Discipline",
+        "Heal",
+        "Lore",
+        "Parry",
+        "Persuade",
+        "Spellcraft"
+      ],
+      "bonusFeatLevels": {
+        "levels": [
+          1,
+          2,
+          3
+        ],
+        "pool": "clericDivine"
+      },
+      "proficiencies": "Armor: none by default (Robes only) \u2014 armor proficiency must be taken as a bonus feat. Weapons: Simple.",
       "spellcasting": "Divine, Wisdom-based, requires preparation (cure/inflict spells are spontaneous)",
       "multiclassRestriction": "Cannot multiclass out of Cleric unless Fallen; once Fallen and multiclassed, cannot regain Cleric status.",
       "features": [
-        "No default armor proficiency — gets 3 bonus feats at levels 1, 2, 3 from armor proficiencies OR the Cleric divine feat list.",
+        "No default armor proficiency \u2014 gets 3 bonus feats at levels 1, 2, 3 from armor proficiencies OR the Cleric divine feat list.",
         "Turn Undead uses modified from vanilla NWN (exact numbers not published).",
-        "Domains reworked — see domains.json.",
+        "Domains reworked \u2014 see domains.json.",
         "Fallen clerics lose their powers until seeking redemption or embracing another deity."
+      ],
+      "proficiencyGrants": [],
+      "autoFeatures": [
+        "Turn Undead"
       ]
     },
     "Commoner": {
@@ -61,39 +162,96 @@
       "alignmentRestriction": "None",
       "hitDie": 4,
       "bab": "1/2",
-      "saves": { "fort": "p", "ref": "p", "will": "p" },
+      "saves": {
+        "fort": "p",
+        "ref": "p",
+        "will": "p"
+      },
       "skillPoints": 4,
-      "classSkills": ["Craft Armor","Craft Trap","Craft Weapon","Discipline","Listen","Spot"],
-      "bonusFeatLevels": { "levels": [1, 2, 3, 4, 5], "pool": "commonerPath" },
+      "classSkills": [
+        "Craft Armor",
+        "Craft Trap",
+        "Craft Weapon",
+        "Discipline",
+        "Listen",
+        "Spot"
+      ],
+      "bonusFeatLevels": {
+        "levels": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "pool": "commonerPath"
+      },
       "proficiencies": "Weapons: all simple weapons only.",
       "maxLevel": 5,
-      "specialRule": "MUST be your starting 1st-2nd level(s); once you take a level in another class you can never take Commoner again. Max Commoner level is 5 — by character level 6 you must be a different class.",
+      "specialRule": "MUST be your starting 1st-2nd level(s); once you take a level in another class you can never take Commoner again. Max Commoner level is 5 \u2014 by character level 6 you must be a different class.",
       "features": [
-        "No Combat XP until Commoner level 5 — still earns XP from all other sources.",
+        "No Combat XP until Commoner level 5 \u2014 still earns XP from all other sources.",
         "XP Multiplier while low-level to offset lack of combat XP: 2.0x at levels 1-2, 1.75x at level 3, 1.25x at level 4, none at level 5+.",
         "Can earn Crafting XP and Contribution XP up to level 3.",
-        "Bonus feat every level (1-5) — Craft path (Natural Crafter, Craft Focus, Masterful Crafter) or Healer path (Clinical Mind/Confidence/Pragmatism/Mastery, Chirurgeon, Chirurgeon's Resourcefulness)."
-      ]
+        "Bonus feat every level (1-5) \u2014 Craft path (Natural Crafter, Craft Focus, Masterful Crafter) or Healer path (Clinical Mind/Confidence/Pragmatism/Mastery, Chirurgeon, Chirurgeon's Resourcefulness)."
+      ],
+      "proficiencyGrants": [
+        "Weapon Proficiency (simple)"
+      ],
+      "autoFeatures": []
     },
     "Druid": {
       "epLocked": true,
       "alignmentRestriction": "Any Neutral",
       "hitDie": 8,
       "bab": "3/4",
-      "saves": { "fort": "g", "ref": "p", "will": "g" },
+      "saves": {
+        "fort": "g",
+        "ref": "p",
+        "will": "g"
+      },
       "skillPoints": 5,
-      "classSkills": ["Animal Empathy","Concentration","Craft Armor","Craft Trap","Craft Weapon","Discipline","Heal","Lore","Parry","Spellcraft","Survival","Swim"],
-      "bonusFeatLevels": { "levels": [5], "pool": "druidLevel5" },
+      "classSkills": [
+        "Animal Empathy",
+        "Concentration",
+        "Craft Armor",
+        "Craft Trap",
+        "Craft Weapon",
+        "Discipline",
+        "Heal",
+        "Lore",
+        "Parry",
+        "Spellcraft",
+        "Survival",
+        "Swim"
+      ],
+      "bonusFeatLevels": {
+        "levels": [
+          5
+        ],
+        "pool": "druidLevel5"
+      },
       "proficiencies": "Armor: Light, Medium. Shields: except Tower. Weapons: Druid weapons only.",
       "spellcasting": "Divine, Wisdom-based, requires preparation",
       "multiclassRestriction": "Cannot multiclass out of Druid unless Fallen; once Fallen and multiclassed, cannot regain Druid status.",
       "features": [
-        "No default animal companion — must use Animal Empathy to tame, then bond (bond cap = Druid level, see the Animal Companion system rule).",
+        "No default animal companion \u2014 must use Animal Empathy to tame, then bond (bond cap = Druid level, see the Animal Companion system rule).",
         "Gains Pathfinding (nature-only shortcut trails).",
         "Gains \"Nature's Bounty\" cantrip (harvest flora without harming it).",
-        "Cannot use metal weapons/tools — doing so blocks spellcasting while equipped (exception: followers of Mielikki may use ranger-tier metal gear).",
+        "Cannot use metal weapons/tools \u2014 doing so blocks spellcasting while equipped (exception: followers of Mielikki may use ranger-tier metal gear).",
         "Level 5 bonus feat, choice of: Wild Shape (major, 2/day), Vermin Shape (2/day), Spirit Link, Hearthtree, Pulse of the Grove (2/day), Spiritbark (2/day), Beastmaster.",
-        "Bonus languages Druidic + Animal — only if Druid is your starting class."
+        "Bonus languages Druidic + Animal \u2014 only if Druid is your starting class."
+      ],
+      "proficiencyGrants": [
+        "Armor Proficiency (light)",
+        "Armor Proficiency (medium)",
+        "Weapon Proficiency (druid)"
+      ],
+      "autoFeatures": [
+        "Woodland Stride",
+        "Trackless Step",
+        "Resist Nature's Lure",
+        "Animal Companion"
       ]
     },
     "Fighter": {
@@ -101,33 +259,105 @@
       "alignmentRestriction": "None",
       "hitDie": 10,
       "bab": "full",
-      "saves": { "fort": "g", "ref": "p", "will": "p" },
+      "saves": {
+        "fort": "g",
+        "ref": "p",
+        "will": "p"
+      },
       "skillPoints": 3,
-      "classSkills": ["Craft Armor","Craft Trap","Craft Weapon","Discipline","Intimidate","Parry","Ride","Taunt"],
-      "bonusFeatLevels": { "levels": [1, 2, 4, 6], "pool": "fighterCombat" },
+      "classSkills": [
+        "Craft Armor",
+        "Craft Trap",
+        "Craft Weapon",
+        "Discipline",
+        "Intimidate",
+        "Parry",
+        "Ride",
+        "Taunt"
+      ],
+      "bonusFeatLevels": {
+        "levels": [
+          1,
+          2,
+          4,
+          6
+        ],
+        "pool": "fighterCombat"
+      },
       "proficiencies": "Armor: Light, Medium, Heavy. Shields: all. Weapons: Martial, Simple.",
       "features": [
         "Fighter Bonus Feat at levels 1, 2, 4, 6 from the combat feat list plus Haze additions (Bone-Crusher Technique, Charismatic Defender, Commander's Rally, Heroic Figure, Inspiring Presence, Defensive Stance).",
         "Gains Armor Specialization automatically at levels 3 (+1 AC) and 6 (+2 AC total, stacking)."
-      ]
+      ],
+      "proficiencyGrants": [
+        "Armor Proficiency (light)",
+        "Armor Proficiency (medium)",
+        "Armor Proficiency (heavy)",
+        "Weapon Proficiency (martial)",
+        "Weapon Proficiency (simple)"
+      ],
+      "autoFeatures": []
     },
     "Monk": {
       "epLocked": false,
       "alignmentRestriction": "Any Lawful",
       "hitDie": 8,
       "bab": "full",
-      "saves": { "fort": "g", "ref": "g", "will": "g" },
+      "saves": {
+        "fort": "g",
+        "ref": "g",
+        "will": "g"
+      },
       "skillPoints": 7,
-      "classSkills": ["Concentration","Craft Armor","Craft Trap","Craft Weapon","Discipline","Heal","Hide","Listen","Lore","Move Silently","Parry","Perform","Spot","Swim","Tumble"],
-      "bonusFeatLevels": { "levels": [2, 4, 6], "pool": "monkPathOrTech" },
+      "classSkills": [
+        "Concentration",
+        "Craft Armor",
+        "Craft Trap",
+        "Craft Weapon",
+        "Discipline",
+        "Heal",
+        "Hide",
+        "Listen",
+        "Lore",
+        "Move Silently",
+        "Parry",
+        "Perform",
+        "Spot",
+        "Swim",
+        "Tumble"
+      ],
+      "bonusFeatLevels": {
+        "levels": [
+          2,
+          4,
+          6
+        ],
+        "pool": "monkPathOrTech"
+      },
       "proficiencies": "Armor: Robes. Weapons: dagger, kama, kukri, quarterstaff, sai, nunchaku, sap, assassin dagger, katar, wind fire wheel, makeshift weapons, club, handaxe, light/heavy crossbow, shuriken, claws, katana, darts, sling.",
-      "kiFeatureLevels": { "1": "Ki Defense", "2": "Ki Cleave", "3": "Ki Reflexes", "4": "Slow Fall" },
+      "kiFeatureLevels": {
+        "1": "Ki Defense",
+        "2": "Ki Cleave",
+        "3": "Ki Reflexes",
+        "4": "Slow Fall"
+      },
       "features": [
         "Ki pool each rest = Monk level + 4.",
         "REMOVED from vanilla: Dodge, Mobility, Evasion, Cleave as automatic class features.",
-        "ADDED: Ki Defense (lvl1), Ki Cleave (lvl2), Ki Reflexes (lvl3), Slow Fall (lvl4) — automatic, not chosen.",
-        "Bonus feats at levels 2, 4, 6 — Two-Weapon Fighting, Ambidexterity, Extra Ki, Dodge, Cleave, Mobility, Evasion, OR pick a Monk Path.",
+        "ADDED: Ki Defense (lvl1), Ki Cleave (lvl2), Ki Reflexes (lvl3), Slow Fall (lvl4) \u2014 automatic, not chosen.",
+        "Bonus feats at levels 2, 4, 6 \u2014 Two-Weapon Fighting, Ambidexterity, Extra Ki, Dodge, Cleave, Mobility, Evasion, OR pick a Monk Path.",
         "Monk Paths: Arcane Fist, Drunken Master, Scarred, Stormspeaker, Sun Soul (3-stage: Initiation/Proficiency/Mastery, fully documented in feats.json), Twin Fangs, Way of the Shadows."
+      ],
+      "proficiencyGrants": [
+        "Weapon Proficiency (monk)"
+      ],
+      "autoFeatures": [
+        "Monk AC Bonus",
+        "Flurry of Blows",
+        "Ki Defense",
+        "Ki Cleave",
+        "Ki Reflexes",
+        "Slow Fall (monk)"
       ]
     },
     "Paladin": {
@@ -135,10 +365,32 @@
       "alignmentRestriction": "Lawful Good only",
       "hitDie": 10,
       "bab": "full",
-      "saves": { "fort": "g", "ref": "p", "will": "p" },
+      "saves": {
+        "fort": "g",
+        "ref": "p",
+        "will": "p"
+      },
       "skillPoints": 5,
-      "classSkills": ["Concentration","Craft Armor","Craft Trap","Craft Weapon","Discipline","Heal","Lore","Parry","Persuade","Ride"],
-      "bonusFeatLevels": { "levels": [1, 3, 5], "pool": "paladinDoctrine" },
+      "classSkills": [
+        "Concentration",
+        "Craft Armor",
+        "Craft Trap",
+        "Craft Weapon",
+        "Discipline",
+        "Heal",
+        "Lore",
+        "Parry",
+        "Persuade",
+        "Ride"
+      ],
+      "bonusFeatLevels": {
+        "levels": [
+          1,
+          3,
+          5
+        ],
+        "pool": "paladinDoctrine"
+      },
       "proficiencies": "Armor: Light, Medium, Heavy. Shields: all. Weapons: Martial, Simple.",
       "spellcasting": "Divine, Charisma-based (changed from vanilla Wisdom-based), requires preparation",
       "multiclassRestriction": "Cannot multiclass out of Paladin unless Fallen; once Fallen and multiclassed, cannot regain Paladin status.",
@@ -146,6 +398,19 @@
         "Code of Conduct: respect legitimate authority, act with honor, help those in need, punish those who threaten innocents.",
         "Turn Undead uses modified from vanilla.",
         "Doctrine feats at levels 1, 3, 5, freely mixed regardless of deity: Doctrine of Rejuvenation (Lay on Hands, Remove Disease, Aura of Renewal), Doctrine of Chivalry (Mark of Judgement, Aura of Gallantry, Unyielding Defender), Doctrine of Nature (Warden's Benediction, Thorned Aegis, Smite Abomination), Doctrine of Righteousness (Divine Might, Divine Shield, Aura of Righteousness), Doctrine of Knowledge (Lore of the Faithful, Divine Enlightenment, Unraveling Smite)."
+      ],
+      "proficiencyGrants": [
+        "Armor Proficiency (light)",
+        "Armor Proficiency (medium)",
+        "Armor Proficiency (heavy)",
+        "Weapon Proficiency (martial)",
+        "Weapon Proficiency (simple)"
+      ],
+      "autoFeatures": [
+        "Turn Undead",
+        "Divine Grace",
+        "Divine Health",
+        "Aura of Courage"
       ]
     },
     "Ranger": {
@@ -153,21 +418,71 @@
       "alignmentRestriction": "None",
       "hitDie": 10,
       "bab": "full",
-      "saves": { "fort": "g", "ref": "p", "will": "p" },
+      "saves": {
+        "fort": "g",
+        "ref": "p",
+        "will": "p"
+      },
       "skillPoints": 6,
-      "classSkills": ["Animal Empathy","Concentration","Craft Armor","Craft Trap","Craft Weapon","Discipline","Heal","Hide","Listen","Lore","Move Silently","Parry","Ride","Search","Spot","Survival","Swim"],
-      "bonusFeatLevels": { "levels": [1, 2, 2, 3, 5], "pool": "rangerCombat", "note": "Level 2 grants two bonus feats." },
+      "classSkills": [
+        "Animal Empathy",
+        "Concentration",
+        "Craft Armor",
+        "Craft Trap",
+        "Craft Weapon",
+        "Discipline",
+        "Heal",
+        "Hide",
+        "Listen",
+        "Lore",
+        "Move Silently",
+        "Parry",
+        "Ride",
+        "Search",
+        "Spot",
+        "Survival",
+        "Swim"
+      ],
+      "bonusFeatLevels": {
+        "levels": [
+          1,
+          2,
+          2,
+          3,
+          5
+        ],
+        "pool": "rangerCombat",
+        "note": "Level 2 grants two bonus feats."
+      },
       "proficiencies": "Armor: Light, Medium. Shields: except Tower. Weapons: Martial, Simple.",
       "spellcasting": "Divine, Wisdom-based, requires preparation",
       "animalCompanionLevel": 4,
-      "favoredEnemyLevels": [1, 2, 3, 4, 5, 6],
+      "favoredEnemyLevels": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
       "features": [
         "Note: Reflex is a POOR save here, unlike vanilla PHB Ranger which has good Fort AND Ref.",
         "Pathfinding access.",
         "Animal Companion at Ranger level 4 (lowered from vanilla level 6); bond cap = Ranger level / 2 rounded down, unless Nature's Companion feat raises it to Druid rate.",
-        "Native dual-wield ability REMOVED — must spend bonus feats on Two-Weapon Fighting + Ambidexterity.",
+        "Native dual-wield ability REMOVED \u2014 must spend bonus feats on Two-Weapon Fighting + Ambidexterity.",
         "Bonus feats from: Ambidexterity, Two-Weapon Fighting, Point Blank Shot, Rapid Shot, Called Shot, Weapon Finesse, Stealthy, Zen Archery, Green Thumb, Vermin Heart, Hunter, Nature's Companion, Primevale Bond, Favored Enemy.",
-        "Bonus language Animal — only if Ranger is your starting class."
+        "Bonus language Animal \u2014 only if Ranger is your starting class."
+      ],
+      "proficiencyGrants": [
+        "Armor Proficiency (light)",
+        "Armor Proficiency (medium)",
+        "Weapon Proficiency (martial)",
+        "Weapon Proficiency (simple)"
+      ],
+      "autoFeatures": [
+        "Favored Enemy",
+        "Animal Companion",
+        "Trackless Step"
       ]
     },
     "Rogue": {
@@ -175,17 +490,62 @@
       "alignmentRestriction": "None",
       "hitDie": 6,
       "bab": "3/4",
-      "saves": { "fort": "p", "ref": "g", "will": "p" },
+      "saves": {
+        "fort": "p",
+        "ref": "g",
+        "will": "p"
+      },
       "skillPoints": 8,
-      "classSkills": ["Alchemy","Appraise","Bluff","Craft Armor","Craft Trap","Craft Weapon","Discipline","Disable Trap","Hide","Listen","Lore","Move Silently","Open Lock","Parry","Perform","Persuade","Pick Pocket","Search","Set Trap","Spot","Taunt","Tumble","Use Magic Device"],
-      "bonusFeatLevels": { "levels": [4, 6], "pool": "rogueTechnique" },
+      "classSkills": [
+        "Alchemy",
+        "Appraise",
+        "Bluff",
+        "Craft Armor",
+        "Craft Trap",
+        "Craft Weapon",
+        "Discipline",
+        "Disable Trap",
+        "Hide",
+        "Listen",
+        "Lore",
+        "Move Silently",
+        "Open Lock",
+        "Parry",
+        "Perform",
+        "Persuade",
+        "Pick Pocket",
+        "Search",
+        "Set Trap",
+        "Spot",
+        "Taunt",
+        "Tumble",
+        "Use Magic Device"
+      ],
+      "bonusFeatLevels": {
+        "levels": [
+          4,
+          6
+        ],
+        "pool": "rogueTechnique"
+      },
       "proficiencies": "Armor: Light. Shields: Small/Bucklers. Weapons: Rogue weapons.",
-      "sneakAttackLevels": { "1": "1d6", "3": "2d6", "5": "3d6" },
+      "sneakAttackLevels": {
+        "1": "1d6",
+        "3": "2d6",
+        "5": "3d6"
+      },
       "features": [
         "Perform added as a rogue class skill (Disguise/Identity System).",
         "Pickpocketing uses a custom !steal command, not the radial menu.",
         "Custom lockpicking: add sneak attack dice (as d6s) to Open Lock rolls.",
         "Bonus feats at levels 4, 6 from: Two-Weapon Fighting, Ambidexterity, Opportunist, Crippling Strike, Defensive Roll, Skill Mastery, Shadowmelder, Lock Savant, Evasive Maneuver, Dagger Specialist, Many-Faces, Arcane Trickster, Knife Thrower, Pickpocket Prodigy, Eavesdropper, Underground Medic, Swashbuckler, Rogue Dash, Crossbow Sniper."
+      ],
+      "proficiencyGrants": [
+        "Armor Proficiency (light)",
+        "Weapon Proficiency (rogue)"
+      ],
+      "autoFeatures": [
+        "Sneak Attack (+1d6)"
       ]
     },
     "Sorcerer": {
@@ -193,10 +553,27 @@
       "alignmentRestriction": "None",
       "hitDie": 4,
       "bab": "1/2",
-      "saves": { "fort": "p", "ref": "p", "will": "g" },
+      "saves": {
+        "fort": "p",
+        "ref": "p",
+        "will": "g"
+      },
       "skillPoints": 3,
-      "classSkills": ["Alchemy","Bluff","Concentration","Craft Armor","Craft Trap","Craft Weapon","Lore","Persuade","Spellcraft"],
-      "bonusFeatLevels": { "levels": [], "pool": null },
+      "classSkills": [
+        "Alchemy",
+        "Bluff",
+        "Concentration",
+        "Craft Armor",
+        "Craft Trap",
+        "Craft Weapon",
+        "Lore",
+        "Persuade",
+        "Spellcraft"
+      ],
+      "bonusFeatLevels": {
+        "levels": [],
+        "pool": null
+      },
       "proficiencies": "Armor: Robes. Weapons: Simple.",
       "spellcasting": "Arcane, Charisma-based, spontaneous, no preparation",
       "features": [
@@ -205,6 +582,13 @@
         "Can bind familiars beyond the starting one during play, capped at caster level. Gets Improved Familiar free at level 1.",
         "Chooses a Sorcerous Origin at level 3.",
         "Manifest Adaptation: spend CXP to re-choose known spells, losing remaining spell slots for the day."
+      ],
+      "proficiencyGrants": [
+        "Weapon Proficiency (simple)"
+      ],
+      "autoFeatures": [
+        "Summon Familiar",
+        "Manifest Bloodline"
       ]
     },
     "Warlock": {
@@ -212,29 +596,76 @@
       "alignmentRestriction": "Chaotic or Evil",
       "hitDie": 6,
       "bab": "3/4",
-      "saves": { "fort": "p", "ref": "p", "will": "g" },
+      "saves": {
+        "fort": "p",
+        "ref": "p",
+        "will": "g"
+      },
       "skillPoints": 3,
-      "classSkills": ["Concentration","Heal","Persuade","Lore","Perform","Spellcraft","Use Magic Device"],
-      "bonusFeatLevels": { "levels": [], "pool": null },
+      "classSkills": [
+        "Concentration",
+        "Heal",
+        "Persuade",
+        "Lore",
+        "Perform",
+        "Spellcraft",
+        "Use Magic Device"
+      ],
+      "bonusFeatLevels": {
+        "levels": [],
+        "pool": null
+      },
       "proficiencies": "Armor: Light. Shields: Small/Bucklers. Weapons: all simple weapons.",
-      "invocationLevels": [1, 2, 3, 4, 6],
-      "damageReductionLevels": { "3": "1/-", "5": "2/-" },
+      "invocationLevels": [
+        1,
+        2,
+        3,
+        4,
+        6
+      ],
+      "damageReductionLevels": {
+        "3": "1/-",
+        "5": "2/-"
+      },
       "features": [
-        "Warlock Patrons are entirely Haze-specific — do not use Forgotten Realms patron lore.",
-        "Casts via Invocations (see invocations reference doc), not the standard spell list — chosen at levels 1, 2, 3, 4, 6. Requires Charisma 10 + invocation level to learn a given invocation level.",
+        "Warlock Patrons are entirely Haze-specific \u2014 do not use Forgotten Realms patron lore.",
+        "Casts via Invocations (see invocations reference doc), not the standard spell list \u2014 chosen at levels 1, 2, 3, 4, 6. Requires Charisma 10 + invocation level to learn a given invocation level.",
         "Eldritch Blast: ranged touch attack, 20m range, no save, 1d6 at level 1, +1d6 every 2 levels after.",
         "Gains physical Damage Reduction: 1/- at level 3, 2/- at level 5."
-      ]
+      ],
+      "proficiencyGrants": [
+        "Armor Proficiency (light)",
+        "Weapon Proficiency (simple)"
+      ],
+      "autoFeatures": []
     },
     "Wizard": {
       "epLocked": false,
       "alignmentRestriction": "None",
       "hitDie": 4,
       "bab": "1/2",
-      "saves": { "fort": "p", "ref": "p", "will": "g" },
+      "saves": {
+        "fort": "p",
+        "ref": "p",
+        "will": "g"
+      },
       "skillPoints": 3,
-      "classSkills": ["Alchemy","Concentration","Craft Armor","Craft Trap","Craft Weapon","Lore","Spellcraft"],
-      "bonusFeatLevels": { "levels": [1, 5], "pool": "wizardItemOrMetamagic" },
+      "classSkills": [
+        "Alchemy",
+        "Concentration",
+        "Craft Armor",
+        "Craft Trap",
+        "Craft Weapon",
+        "Lore",
+        "Spellcraft"
+      ],
+      "bonusFeatLevels": {
+        "levels": [
+          1,
+          5
+        ],
+        "pool": "wizardItemOrMetamagic"
+      },
       "proficiencies": "Armor: Robes. Weapons: club, dagger, light crossbow, heavy crossbow, quarterstaff.",
       "spellcasting": "Arcane, Intelligence-based, requires preparation. Knows all cantrips + (4 + INT mod) 1st-level spells to start.",
       "features": [
@@ -242,6 +673,12 @@
         "Scroll scribing (from level 3) costs CXP instead of gold/materials: 24 CXP for 1st-level, 36 for 2nd, 48 for 3rd.",
         "Can bind additional familiars beyond the starting one, capped at caster level.",
         "School specialization: +2 Spellcraft (recovery) for that school, -1 for all others. Generalists skip the bonus slot but get +1 Spellcraft on everything."
+      ],
+      "proficiencyGrants": [
+        "Weapon Proficiency (wizard)"
+      ],
+      "autoFeatures": [
+        "Summon Familiar"
       ]
     }
   }
