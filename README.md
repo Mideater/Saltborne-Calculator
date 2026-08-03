@@ -58,21 +58,3 @@ skill for anything you've taken.
 
 **Summary** — sits in the sidebar the whole time so you don't have to
 scroll back up to check your totals.
-
-## Where the data comes from
-
-Race, class, and skill data were pulled from the Haze wiki. Feat data comes
-from the game's own feat export — 626 feats with real prerequisites, which
-is why the eligibility checking is fairly trustworthy. None of it is
-guaranteed perfect — anything marked "check in-game" or flagged as
-unconfirmed in the data files should be treated as a starting point, not
-gospel.
-
-## Something looks wrong?
-
-If a race, class, feat, or skill looks off, the underlying data lives in
-plain JSON files under `/data` — races, classes, feats, skills, domains,
-invocations, and bonus feat pools, one file each. If you're comfortable
-poking at those yourself, `DEVELOPMENT.md` explains how the project is
-structured and how to make changes. Otherwise, just note what looks wrong
-and pass it along to whoever maintains this for your server.
