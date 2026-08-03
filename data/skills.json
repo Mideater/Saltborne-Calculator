@@ -1,33 +1,160 @@
 {
-  "_comment": "Only skills confirmed changed from vanilla NWN are documented with descriptions here (from the Skill Changes wiki page). Alchemy, Appraise, Bluff, and Ride are presumed to still exist unchanged but were not confirmed. Craft Armor/Trap/Weapon are REMOVED as skills on Haze (moved to a separate Crafting System) — they still appear in classes.json's classSkills lists because that data predates this correction; the engine should treat them as non-functional / ignore them for skill-point purposes until you confirm what replaced them.",
+  "_comment": "Rebuilt from the real Skill Focus (X) feat list in feats.json \u2014 every genuine Haze skill has a matching Skill Focus variant, so this list is exhaustive and confirmed, not guessed. Alchemy, Appraise, Bluff, Ride, Intimidate, and Swim were previously listed as 'presumed unchanged from vanilla' but have NO matching Skill Focus feat anywhere in the real data \u2014 removed for lack of proof. If any of these turn out to be real, the fix is re-adding them here once confirmed.",
   "skills": [
-    { "name": "Acrobatics", "formerName": "Tumble", "keyAbility": "DEX", "description": "Used in several skill checks and to avoid attacks of opportunity; can also provide additional AC." },
-    { "name": "Alchemy", "keyAbility": "INT", "description": "Not confirmed changed — presumed to exist as in vanilla NWN.", "unconfirmed": true },
-    { "name": "Animal Empathy", "keyAbility": "CHA", "description": "Primary skill for interacting with animals — required for the Animal Companion System." },
-    { "name": "Appraise", "keyAbility": "INT", "description": "Not confirmed changed — presumed to exist as in vanilla NWN.", "unconfirmed": true },
-    { "name": "Bluff", "keyAbility": "CHA", "description": "Not confirmed changed — presumed to exist as in vanilla NWN.", "unconfirmed": true },
-    { "name": "Concentration", "keyAbility": "CON", "description": "Maintains a spell during an attack of opportunity or when casting defensively." },
-    { "name": "Disable Trap", "formerName": "Disable Device", "keyAbility": "INT", "description": "Used to disable traps and other devices, or on DM request." },
-    { "name": "Set Trap", "formerName": "Disable Device (Set)", "keyAbility": "DEX", "description": "Used to set traps and other devices, or on DM request." },
-    { "name": "Discipline", "keyAbility": "STR", "description": "Resists combat maneuvers like Disarm and Knockdown." },
-    { "name": "Heal", "keyAbility": "WIS", "description": "Determines healing amount and success with healing kits; also used for cause-of-death or other DM-requested checks." },
-    { "name": "Hide", "keyAbility": "DEX", "description": "Used together with Move Silently to determine stealth check success." },
-    { "name": "Move Silently", "keyAbility": "DEX", "description": "Used together with Hide to determine stealth check success." },
-    { "name": "Influence", "formerName": "Persuade", "keyAbility": "CHA", "description": "Determines success/failure of most social interactions; also affects NPC shop prices." },
-    { "name": "Knowledge", "formerName": "Lore", "keyAbility": "INT", "description": "Split into multiple Knowledge sub-skills (Arcana, History, Nature, Religion, etc. — exact sub-list not confirmed); each affects several server mechanics and DM events." },
-    { "name": "Listen", "keyAbility": "WIS", "description": "Counters Move Silently; also used to overhear whispers and other in-game events." },
-    { "name": "Open Lock", "keyAbility": "DEX", "description": "Used with the Theft & Recovery system to access chests and doors. Rogues add sneak attack dice (as d6s) to this roll." },
-    { "name": "Parry", "keyAbility": "DEX", "description": "Has several Haze-specific changes giving it more value than in the base game (specifics not fully captured)." },
-    { "name": "Perform", "keyAbility": "CHA", "description": "Used for Bard Songs and with the Identity System (disguise-related)." },
-    { "name": "Pickpocket", "formerName": "Sleight of Hand / Pick Pocket", "keyAbility": "DEX", "description": "Used with the Theft & Recovery system to steal from other players/NPCs, with DM oversight." },
-    { "name": "Ride", "keyAbility": "DEX", "description": "Not confirmed changed — presumed to exist as in vanilla NWN.", "unconfirmed": true },
-    { "name": "Search", "keyAbility": "INT", "description": "Determines success finding traps, loot, secret paths, and more." },
-    { "name": "Spellcraft", "keyAbility": "INT", "description": "Identifies cast spells; also used in the Spellcraft System for Wizards & Sorcerers (spell slot recovery)." },
-    { "name": "Spot", "keyAbility": "WIS", "description": "Counters Hide; also used in examine nodes and other in-game events." },
-    { "name": "Survival", "keyAbility": "WIS", "description": "Used in Survival Crafting and to track creatures through an area (with DM help)." },
-    { "name": "Taunt", "keyAbility": "CHA", "description": "Attempts to lower a target's AC and induce spell failure." },
-    { "name": "Use Magic Device", "keyAbility": "CHA", "description": "Bypasses requirements for magic items; also used during DM events." }
+    {
+      "name": "Acrobatics",
+      "keyAbility": "DEX",
+      "description": "Used in several skill checks and to avoid attacks of opportunity; can also provide additional AC.",
+      "formerName": "Tumble"
+    },
+    {
+      "name": "Animal Empathy",
+      "keyAbility": "CHA",
+      "description": "Primary skill for interacting with animals \u2014 required for the Animal Companion System."
+    },
+    {
+      "name": "Concentration",
+      "keyAbility": "CON",
+      "description": "Maintains a spell during an attack of opportunity or when casting defensively."
+    },
+    {
+      "name": "Disable Device",
+      "keyAbility": "INT",
+      "description": "Used to disable traps and other devices, or on DM request.",
+      "formerName": "Disable Trap"
+    },
+    {
+      "name": "Discipline",
+      "keyAbility": "STR",
+      "description": "Resists combat maneuvers like Disarm and Knockdown."
+    },
+    {
+      "name": "Heal",
+      "keyAbility": "WIS",
+      "description": "Determines healing amount and success with healing kits; also used for cause-of-death or other DM-requested checks."
+    },
+    {
+      "name": "Hide",
+      "keyAbility": "DEX",
+      "description": "Used together with Move Silently to determine stealth check success."
+    },
+    {
+      "name": "Influence",
+      "keyAbility": "CHA",
+      "description": "Determines success/failure of most social interactions; also affects NPC shop prices.",
+      "formerName": "Persuade"
+    },
+    {
+      "name": "Knowledge: Arcane",
+      "keyAbility": "INT",
+      "description": "One of five confirmed Knowledge sub-skills (replacing the old single Lore skill).",
+      "formerName": "Lore"
+    },
+    {
+      "name": "Knowledge: Architecture",
+      "keyAbility": "INT",
+      "description": "One of five confirmed Knowledge sub-skills (replacing the old single Lore skill).",
+      "formerName": "Lore"
+    },
+    {
+      "name": "Knowledge: General",
+      "keyAbility": "INT",
+      "description": "One of five confirmed Knowledge sub-skills (replacing the old single Lore skill).",
+      "formerName": "Lore"
+    },
+    {
+      "name": "Knowledge: Nature",
+      "keyAbility": "INT",
+      "description": "One of five confirmed Knowledge sub-skills (replacing the old single Lore skill).",
+      "formerName": "Lore"
+    },
+    {
+      "name": "Knowledge: Religion",
+      "keyAbility": "INT",
+      "description": "One of five confirmed Knowledge sub-skills (replacing the old single Lore skill).",
+      "formerName": "Lore"
+    },
+    {
+      "name": "Listen",
+      "keyAbility": "WIS",
+      "description": "Counters Move Silently; also used to overhear whispers and other in-game events."
+    },
+    {
+      "name": "Move Silently",
+      "keyAbility": "DEX",
+      "description": "Used together with Hide to determine stealth check success."
+    },
+    {
+      "name": "Open Lock",
+      "keyAbility": "DEX",
+      "description": "Used with the Theft & Recovery system to access chests and doors. Rogues add sneak attack dice (as d6s) to this roll."
+    },
+    {
+      "name": "Parry",
+      "keyAbility": "DEX",
+      "description": "Has several Haze-specific changes giving it more value than in the base game (specifics not fully captured)."
+    },
+    {
+      "name": "Perform",
+      "keyAbility": "CHA",
+      "description": "Used for Bard Songs and with the Identity System (disguise-related)."
+    },
+    {
+      "name": "Pick Pocket",
+      "keyAbility": "DEX",
+      "description": "Used with the Theft & Recovery system to steal from other players/NPCs, with DM oversight.",
+      "formerName": "Pickpocket / Sleight of Hand"
+    },
+    {
+      "name": "Search",
+      "keyAbility": "INT",
+      "description": "Determines success finding traps, loot, secret paths, and more."
+    },
+    {
+      "name": "Set Device",
+      "keyAbility": "DEX",
+      "description": "Used to set traps and other devices, or on DM request.",
+      "formerName": "Set Trap"
+    },
+    {
+      "name": "Spellcraft",
+      "keyAbility": "INT",
+      "description": "Identifies cast spells; also used in the Spellcraft System for Wizards & Sorcerers (spell slot recovery)."
+    },
+    {
+      "name": "Spot",
+      "keyAbility": "WIS",
+      "description": "Counters Hide; also used in examine nodes and other in-game events."
+    },
+    {
+      "name": "Survival",
+      "keyAbility": "WIS",
+      "description": "Used in Survival Crafting and to track creatures through an area (with DM help)."
+    },
+    {
+      "name": "Taunt",
+      "keyAbility": "CHA",
+      "description": "Attempts to lower a target's AC and induce spell failure."
+    },
+    {
+      "name": "Use Magic Device",
+      "keyAbility": "CHA",
+      "description": "Bypasses requirements for magic items; also used during DM events."
+    }
   ],
-  "removedSkills": ["Craft Armor", "Craft Trap", "Craft Weapon"],
-  "removedSkillsNote": "These three no longer exist as skills — crafting now runs through a separate Crafting System (5 primary + 2 secondary crafts, using CXP, per a wiki page found mid-session). Class skill lists elsewhere in this dataset may still list them as a holdover; treat any points 'spent' there as unavailable until the calculator is updated to use the real Crafting System instead."
+  "removedSkills": [
+    "Craft Armor",
+    "Craft Trap",
+    "Craft Weapon"
+  ],
+  "removedSkillsNote": "These three no longer exist as skills \u2014 crafting now runs through a separate Crafting System (5 primary + 2 secondary crafts, using CXP).",
+  "unconfirmedRemoved": [
+    "Alchemy",
+    "Appraise",
+    "Bluff",
+    "Ride",
+    "Intimidate",
+    "Swim"
+  ],
+  "unconfirmedRemovedNote": "These were removed from this file because no Skill Focus (X) feat exists for any of them in the real feat export, and no wiki page confirms them either. If you find proof any of these exist, add them back."
 }

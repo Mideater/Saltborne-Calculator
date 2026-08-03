@@ -14,18 +14,12 @@
       "skillPoints": 5,
       "classSkills": [
         "Animal Empathy",
-        "Craft Armor",
-        "Craft Trap",
-        "Craft Weapon",
         "Discipline",
         "Heal",
-        "Intimidate",
         "Listen",
         "Parry",
-        "Ride",
         "Spot",
         "Survival",
-        "Swim",
         "Taunt"
       ],
       "bonusFeatLevels": {
@@ -63,27 +57,25 @@
       },
       "skillPoints": 8,
       "classSkills": [
-        "Alchemy",
-        "Appraise",
-        "Bluff",
         "Concentration",
-        "Craft Armor",
-        "Craft Trap",
-        "Craft Weapon",
         "Discipline",
-        "Disable Trap",
+        "Disable Device",
         "Hide",
         "Listen",
-        "Lore",
+        "Knowledge: Arcane",
+        "Knowledge: Architecture",
+        "Knowledge: General",
+        "Knowledge: Nature",
+        "Knowledge: Religion",
         "Move Silently",
         "Parry",
         "Perform",
-        "Persuade",
+        "Influence",
         "Pick Pocket",
         "Search",
         "Spellcraft",
         "Spot",
-        "Tumble",
+        "Acrobatics",
         "Use Magic Device"
       ],
       "bonusFeatLevels": {
@@ -125,14 +117,15 @@
       "skillPoints": 3,
       "classSkills": [
         "Concentration",
-        "Craft Armor",
-        "Craft Trap",
-        "Craft Weapon",
         "Discipline",
         "Heal",
-        "Lore",
+        "Knowledge: Arcane",
+        "Knowledge: Architecture",
+        "Knowledge: General",
+        "Knowledge: Nature",
+        "Knowledge: Religion",
         "Parry",
-        "Persuade",
+        "Influence",
         "Spellcraft"
       ],
       "bonusFeatLevels": {
@@ -169,9 +162,6 @@
       },
       "skillPoints": 4,
       "classSkills": [
-        "Craft Armor",
-        "Craft Trap",
-        "Craft Weapon",
         "Discipline",
         "Listen",
         "Spot"
@@ -214,16 +204,16 @@
       "classSkills": [
         "Animal Empathy",
         "Concentration",
-        "Craft Armor",
-        "Craft Trap",
-        "Craft Weapon",
         "Discipline",
         "Heal",
-        "Lore",
+        "Knowledge: Arcane",
+        "Knowledge: Architecture",
+        "Knowledge: General",
+        "Knowledge: Nature",
+        "Knowledge: Religion",
         "Parry",
         "Spellcraft",
-        "Survival",
-        "Swim"
+        "Survival"
       ],
       "bonusFeatLevels": {
         "levels": [
@@ -266,13 +256,8 @@
       },
       "skillPoints": 3,
       "classSkills": [
-        "Craft Armor",
-        "Craft Trap",
-        "Craft Weapon",
         "Discipline",
-        "Intimidate",
         "Parry",
-        "Ride",
         "Taunt"
       ],
       "bonusFeatLevels": {
@@ -311,20 +296,20 @@
       "skillPoints": 7,
       "classSkills": [
         "Concentration",
-        "Craft Armor",
-        "Craft Trap",
-        "Craft Weapon",
         "Discipline",
         "Heal",
         "Hide",
         "Listen",
-        "Lore",
+        "Knowledge: Arcane",
+        "Knowledge: Architecture",
+        "Knowledge: General",
+        "Knowledge: Nature",
+        "Knowledge: Religion",
         "Move Silently",
         "Parry",
         "Perform",
         "Spot",
-        "Swim",
-        "Tumble"
+        "Acrobatics"
       ],
       "bonusFeatLevels": {
         "levels": [
@@ -373,15 +358,15 @@
       "skillPoints": 5,
       "classSkills": [
         "Concentration",
-        "Craft Armor",
-        "Craft Trap",
-        "Craft Weapon",
         "Discipline",
         "Heal",
-        "Lore",
+        "Knowledge: Arcane",
+        "Knowledge: Architecture",
+        "Knowledge: General",
+        "Knowledge: Nature",
+        "Knowledge: Religion",
         "Parry",
-        "Persuade",
-        "Ride"
+        "Influence"
       ],
       "bonusFeatLevels": {
         "levels": [
@@ -427,21 +412,20 @@
       "classSkills": [
         "Animal Empathy",
         "Concentration",
-        "Craft Armor",
-        "Craft Trap",
-        "Craft Weapon",
         "Discipline",
         "Heal",
         "Hide",
         "Listen",
-        "Lore",
+        "Knowledge: Arcane",
+        "Knowledge: Architecture",
+        "Knowledge: General",
+        "Knowledge: Nature",
+        "Knowledge: Religion",
         "Move Silently",
         "Parry",
-        "Ride",
         "Search",
         "Spot",
-        "Survival",
-        "Swim"
+        "Survival"
       ],
       "bonusFeatLevels": {
         "levels": [
@@ -497,28 +481,26 @@
       },
       "skillPoints": 8,
       "classSkills": [
-        "Alchemy",
-        "Appraise",
-        "Bluff",
-        "Craft Armor",
-        "Craft Trap",
-        "Craft Weapon",
         "Discipline",
-        "Disable Trap",
+        "Disable Device",
         "Hide",
         "Listen",
-        "Lore",
+        "Knowledge: Arcane",
+        "Knowledge: Architecture",
+        "Knowledge: General",
+        "Knowledge: Nature",
+        "Knowledge: Religion",
         "Move Silently",
         "Open Lock",
         "Parry",
         "Perform",
-        "Persuade",
+        "Influence",
         "Pick Pocket",
         "Search",
-        "Set Trap",
+        "Set Device",
         "Spot",
         "Taunt",
-        "Tumble",
+        "Acrobatics",
         "Use Magic Device"
       ],
       "bonusFeatLevels": {
@@ -560,14 +542,13 @@
       },
       "skillPoints": 3,
       "classSkills": [
-        "Alchemy",
-        "Bluff",
         "Concentration",
-        "Craft Armor",
-        "Craft Trap",
-        "Craft Weapon",
-        "Lore",
-        "Persuade",
+        "Knowledge: Arcane",
+        "Knowledge: Architecture",
+        "Knowledge: General",
+        "Knowledge: Nature",
+        "Knowledge: Religion",
+        "Influence",
         "Spellcraft"
       ],
       "bonusFeatLevels": {
@@ -605,8 +586,12 @@
       "classSkills": [
         "Concentration",
         "Heal",
-        "Persuade",
-        "Lore",
+        "Influence",
+        "Knowledge: Arcane",
+        "Knowledge: Architecture",
+        "Knowledge: General",
+        "Knowledge: Nature",
+        "Knowledge: Religion",
         "Perform",
         "Spellcraft",
         "Use Magic Device"
@@ -637,7 +622,10 @@
         "Armor Proficiency (light)",
         "Weapon Proficiency (simple)"
       ],
-      "autoFeatures": []
+      "autoFeatures": [
+        "Damage Reduction 1",
+        "Damage Reduction 2"
+      ]
     },
     "Wizard": {
       "epLocked": false,
@@ -651,12 +639,12 @@
       },
       "skillPoints": 3,
       "classSkills": [
-        "Alchemy",
         "Concentration",
-        "Craft Armor",
-        "Craft Trap",
-        "Craft Weapon",
-        "Lore",
+        "Knowledge: Arcane",
+        "Knowledge: Architecture",
+        "Knowledge: General",
+        "Knowledge: Nature",
+        "Knowledge: Religion",
         "Spellcraft"
       ],
       "bonusFeatLevels": {

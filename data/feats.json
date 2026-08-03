@@ -1,6 +1,6 @@
 {
   "_comment": "Processed from the raw Haze feat API export. isGroup=true entries are weapon/skill-choice headers (e.g. base Weapon Focus) \u2014 the individual choosable variants (e.g. Weapon Focus (bastard sword)) are separate entries in this same list with their own id and prereqs, tagged with groupId/groupName pointing back to the header. isE6Only=true feats are NOT available during normal 1-6 leveling \u2014 they unlock post-level-6 via Epic XP (see the E6 system notes) and eexpCost is what they cost in that system.",
-  "count": 626,
+  "count": 618,
   "feats": [
     {
       "id": 1395,
@@ -1848,32 +1848,6 @@
       "groupName": "Invocation (Lesser)",
       "memberIds": [],
       "eexpCost": 3000,
-      "requiredFor": [],
-      "isE6Only": false
-    },
-    {
-      "id": 1451,
-      "name": "Bull Rush",
-      "description": "Type of Feat: Monster\nSpecifics: You can make a bull rush as a standard action or as part of a charge, in place of the melee attack. You can only bull rush an opponent who is no more than one size category larger than you. A bull rush attempts to push an opponent straight back without doing any harm. If you do not have the Improved Bull Rush feat, or a similar ability, initiating a bull rush provokes an attack of opportunity from the target of your maneuver.\n\nIf your attack is successful, your target is pushed back 5 feet. For every 5 by which your attack exceeds your opponent\u2019s CMD you can push the target back an additional 5 feet. You can move with the target if you wish but you must have the available movement to do so. If your attack fails, your movement ends in front of the target.\n\nUse: Selected.",
-      "category": "Active Combat",
-      "prereqs": {
-        "abilities": [],
-        "bab": null,
-        "level": null,
-        "max_level": null,
-        "level_class": null,
-        "spell_level": null,
-        "fort_save": null,
-        "feats_all": [],
-        "feats_or": [],
-        "skills": []
-      },
-      "hasPrereqs": false,
-      "isGroup": false,
-      "groupId": null,
-      "groupName": null,
-      "memberIds": [],
-      "eexpCost": null,
       "requiredFor": [],
       "isE6Only": false
     },
@@ -7111,32 +7085,6 @@
       "isE6Only": false
     },
     {
-      "id": 1452,
-      "name": "Improved Bull Rush",
-      "description": "Type of Feat: Monster\nSpecifics: You do not provoke an attack of opportunity when performing a bull rush combat maneuver. In addition, you receive a +2 bonus on checks made to bull rush a foe. You also receive a +2 bonus to your Combat Maneuver Defense whenever an opponent tries to bull rush you.\n\nUse: Selected.",
-      "category": "Active Combat",
-      "prereqs": {
-        "abilities": [],
-        "bab": null,
-        "level": null,
-        "max_level": null,
-        "level_class": null,
-        "spell_level": null,
-        "fort_save": null,
-        "feats_all": [],
-        "feats_or": [],
-        "skills": []
-      },
-      "hasPrereqs": false,
-      "isGroup": false,
-      "groupId": null,
-      "groupName": null,
-      "memberIds": [],
-      "eexpCost": null,
-      "requiredFor": [],
-      "isE6Only": false
-    },
-    {
       "id": 696,
       "name": "Improved Combat Casting",
       "description": "Type of Feat: Spell\nPrerequisite: Combat Casting, Concentration 6+ ranks.\nSpecifics: The character does not incur attacks of opportunity for casting spells while threatened.\n\nAdditionally, characters with this feat gain an additional +1 bonus to touch attacks from spells, as if they had a weapon focus (spells) feat.\n\nUse: Automatic.",
@@ -7169,32 +7117,6 @@
       "groupName": null,
       "memberIds": [],
       "eexpCost": 6000,
-      "requiredFor": [],
-      "isE6Only": false
-    },
-    {
-      "id": 292,
-      "name": "Improved Critical (creature)",
-      "description": "Type of Feat: Monster\nPrerequisite: -\nSpecifics: Grants Improved Critical with the creature weapon.\nUse: Automatic.",
-      "category": "Combat",
-      "prereqs": {
-        "abilities": [],
-        "bab": null,
-        "level": null,
-        "max_level": null,
-        "level_class": null,
-        "spell_level": null,
-        "fort_save": null,
-        "feats_all": [],
-        "feats_or": [],
-        "skills": []
-      },
-      "hasPrereqs": false,
-      "isGroup": false,
-      "groupId": null,
-      "groupName": null,
-      "memberIds": [],
-      "eexpCost": null,
       "requiredFor": [],
       "isE6Only": false
     },
@@ -9028,32 +8950,6 @@
       "isE6Only": false
     },
     {
-      "id": 1453,
-      "name": "Multi-Attack",
-      "description": "Type of Feat: Monster\nPrerequisite: Three or more natural attacks (creature weapons)\nSpecifics: The creature's secondary attacks with natural weapons take only a -2 penalty.\nNormal: Without this feat, the creature's secondary attacks with natural weapons take a -5 penalty.\nUse: Automatic.",
-      "category": "Combat",
-      "prereqs": {
-        "abilities": [],
-        "bab": null,
-        "level": null,
-        "max_level": null,
-        "level_class": null,
-        "spell_level": null,
-        "fort_save": null,
-        "feats_all": [],
-        "feats_or": [],
-        "skills": []
-      },
-      "hasPrereqs": false,
-      "isGroup": false,
-      "groupId": null,
-      "groupName": null,
-      "memberIds": [],
-      "eexpCost": null,
-      "requiredFor": [],
-      "isE6Only": false
-    },
-    {
       "id": 1187,
       "name": "Natural Crafter",
       "description": "Type of Feat: General\nPrerequisite: Can only take this feat at 1st-level.\nRequired for: masterful crafter\nSpecifics: Character is able to gain an additional 8 Craft XP per day.\n\nUse: automatic.",
@@ -9381,32 +9277,6 @@
       "isE6Only": false
     },
     {
-      "id": 1448,
-      "name": "Pounce",
-      "description": "Type of Feat: Monster\nSpecifics: When a creature with this special attack makes a charge, it can make a full attack (including rake attacks if the creature also has the rake ability).\n\nUse: Selected.",
-      "category": "Active Combat",
-      "prereqs": {
-        "abilities": [],
-        "bab": null,
-        "level": null,
-        "max_level": null,
-        "level_class": null,
-        "spell_level": null,
-        "fort_save": null,
-        "feats_all": [],
-        "feats_or": [],
-        "skills": []
-      },
-      "hasPrereqs": false,
-      "isGroup": false,
-      "groupId": null,
-      "groupName": null,
-      "memberIds": [],
-      "eexpCost": null,
-      "requiredFor": [],
-      "isE6Only": false
-    },
-    {
       "id": 28,
       "name": "Power Attack",
       "description": "Type of feat: general (available every three level-ups)\nPrerequisite: strength 13+\nRequired for: cleave, improved power attack, great cleave, divine might\n\nSpecifics: A character with this feat can make powerful but ungainly attacks. When power attack is selected, it grants a +3 bonus to the damage roll, but at the cost of -2 to the attack roll. \n\nUse: combat mode",
@@ -9655,32 +9525,6 @@
       "groupName": null,
       "memberIds": [],
       "eexpCost": 5000,
-      "requiredFor": [],
-      "isE6Only": false
-    },
-    {
-      "id": 1449,
-      "name": "Rake",
-      "description": "Type of Feat: Monster\nSpecifics: A creature with this special attack gains extra natural attacks under certain conditions, typically when it grapples its foe. In addition to the options available to all grapplers, a monster with the rake ability gains two free claw attacks that it can use only against a grappled foe. The bonus and damage caused by these attacks is included in the creature's description. A monster with the rake ability must begin its turn already grappling to use its rake--it can't begin a grapple and rake in the same turn.\n\nUse: Selected.",
-      "category": "Combat",
-      "prereqs": {
-        "abilities": [],
-        "bab": null,
-        "level": null,
-        "max_level": null,
-        "level_class": null,
-        "spell_level": null,
-        "fort_save": null,
-        "feats_all": [],
-        "feats_or": [],
-        "skills": []
-      },
-      "hasPrereqs": false,
-      "isGroup": false,
-      "groupId": null,
-      "groupName": null,
-      "memberIds": [],
-      "eexpCost": null,
       "requiredFor": [],
       "isE6Only": false
     },
@@ -14180,32 +14024,6 @@
       "isE6Only": false
     },
     {
-      "id": 1450,
-      "name": "Trample",
-      "description": "Type of Feat: Monster\nSpecifics: As a full-round action, a creature with the trample ability can attempt to overrun any creature that is at least one size category Smaller than itself. This works just like the overrun combat maneuver, but the trampling creature does not need to make a check, it merely has to move over opponents in its path. Targets of a trample take an amount of damage equal to the trampling creature\u2019s slam damage + 1-1/2 times its Str modifier. Targets of a trample can make an attack of opportunity, but at a \u20134 penalty. If targets forgo an attack of opportunity, they can attempt to avoid the trampling creature and receive a Reflex save to take half damage. The save DC against a creature\u2019s trample attack is 10 + 1/2 the creature\u2019s HD + the creature\u2019s Str modifier (the exact DC is given in the creature\u2019s descriptive text). A trampling creature can only deal trampling damage to each target once per round, no matter how many times its movement takes it over a target creature.\n\nUse: Selected.",
-      "category": "Active Combat",
-      "prereqs": {
-        "abilities": [],
-        "bab": null,
-        "level": null,
-        "max_level": null,
-        "level_class": null,
-        "spell_level": null,
-        "fort_save": null,
-        "feats_all": [],
-        "feats_or": [],
-        "skills": []
-      },
-      "hasPrereqs": false,
-      "isGroup": false,
-      "groupId": null,
-      "groupName": null,
-      "memberIds": [],
-      "eexpCost": null,
-      "requiredFor": [],
-      "isE6Only": false
-    },
-    {
       "id": 294,
       "name": "Turn Undead",
       "description": "Type of Feat: Class\nPrerequisite: Cleric level 1 or Paladin level 2.\nRequired for: Divine Might and Divine Shield.\nSpecifics: With this feat, the character can force undead to flee in terror. This ability may be activated three times per day, plus the cleric's Charisma modifier. The cleric's level and Charisma are used to determine how many undead are turned.\nUse: Selected. If the cleric has twice as many levels as the undead have Hit Die, the undead are instantly destroyed.",
@@ -17518,32 +17336,6 @@
       "isGroup": false,
       "groupId": 1000002,
       "groupName": "Weapon Specialization",
-      "memberIds": [],
-      "eexpCost": null,
-      "requiredFor": [],
-      "isE6Only": false
-    },
-    {
-      "id": 290,
-      "name": "Weapon Specialization (creature)",
-      "description": "Type of Feat: Monster\nPrerequisite: -\nSpecifics: Grants Weapon Specialization with the creature weapon.\nUse: Automatic.",
-      "category": "Combat",
-      "prereqs": {
-        "abilities": [],
-        "bab": null,
-        "level": null,
-        "max_level": null,
-        "level_class": null,
-        "spell_level": null,
-        "fort_save": null,
-        "feats_all": [],
-        "feats_or": [],
-        "skills": []
-      },
-      "hasPrereqs": false,
-      "isGroup": false,
-      "groupId": null,
-      "groupName": null,
       "memberIds": [],
       "eexpCost": null,
       "requiredFor": [],

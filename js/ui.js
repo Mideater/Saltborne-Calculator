@@ -19,6 +19,7 @@ const state = {
   pointPool: 30,
   base: { STR: 8, DEX: 8, CON: 8, INT: 8, WIS: 8, CHA: 8 },
   levels: ['Fighter', 'Fighter', 'Fighter', 'Fighter', 'Fighter', 'Fighter'],
+  hpRolls: {}, // charLevel (4,5,6) -> rolled value, or absent = "use the guaranteed floor"
   featChoices: {},   // slotKey -> feat id
   skillRanks: {},    // skill name -> ranks
 };
@@ -141,17 +142,16 @@ function renderRace() {
 
   const sr = currentSubraceDef();
   const box = document.getElementById('raceInfo');
-  const eclBox = document.getElementById('eclDisplay');
 
   if (!sr.saltborneEligible) state.saltborneApplied = false;
   const totalEcl = Engine.totalEcl(DATA.races, state.raceGroup, state.subrace, state.saltborneApplied);
-  eclBox.value = totalEcl ? `+${totalEcl}` : '+0';
 
   const verified = sr.verified !== false;
   const modsText = Object.entries(sr.mods || {}).map(([k, v]) => `${k} ${fmt(v)}`).join(', ') || 'None';
   const epText = sr.ep ? `<span class="pill warn">${sr.ep} EP</span> ` : '';
   const verifiedTag = verified ? '' : '<span class="pill warn">Check in-game</span> ';
-  box.innerHTML = `${epText}${verifiedTag}<b>Ability mods:</b> ${modsText}<br><br>` +
+  const eclText = totalEcl ? `<span class="pill brass">ECL +${totalEcl}</span> ` : '';
+  box.innerHTML = `${eclText}${epText}${verifiedTag}<b>Ability mods:</b> ${modsText}<br><br>` +
     (sr.traits || []).map(t => `• ${t}`).join('<br>') +
     (sr.notes ? `<br><br><i>${sr.notes}</i>` : '');
 
@@ -160,13 +160,18 @@ function renderRace() {
   if (sr.saltborneEligible) {
     const st = DATA.races.saltborneTemplate;
     const stMods = Object.entries(st.mods).map(([k, v]) => `${k} ${fmt(v)}`).join(', ');
+    const wasted = Engine.saltborneWastedStr(state.base, DATA.races, state.raceGroup, state.subrace, state.raceOverride);
+    const wasteWarning = wasted > 0
+      ? `<div class="warn-line bad mt8">Heads up: ${wasted} point${wasted > 1 ? 's' : ''} of Saltborne's +2 STR would be wasted here — STR is capped at 20, and your base + racial STR is already high enough to hit that cap on its own.</div>`
+      : '';
     saltBox.style.display = 'block';
     saltBox.innerHTML = `
       <label style="display:flex; align-items:center; gap:8px; cursor:pointer; text-transform:none; letter-spacing:0;">
         <input type="checkbox" id="saltborneCheck" ${state.saltborneApplied ? 'checked' : ''} style="width:16px;height:16px;">
-        <span>Apply <b>Saltborne</b> template (+${st.ecl} ECL, ${st.ep} EP) — adds ${stMods} on top of the base subrace above</span>
+        <span>Apply <b>Saltborne</b> template (+${st.ecl} ECL, ${st.ep} EP) — adds ${stMods} on top of the base subrace above (capped at 20 STR total)</span>
       </label>
       ${state.saltborneApplied ? `<div class="h-note" style="margin-top:8px;">${st.traits.map(t => '• ' + t).join('<br>')}<br><br><i>${st.notes}</i></div>` : ''}
+      ${wasteWarning}
     `;
     document.getElementById('saltborneCheck').addEventListener('change', e => {
       state.saltborneApplied = e.target.checked;
@@ -196,7 +201,6 @@ function renderAbilities() {
   const mods = Engine.raceAbilityMods(DATA.races, state.raceGroup, state.subrace);
   let spent = 0;
   Engine.ABILS.forEach(a => spent += Engine.pointBuyCost(state.base[a]));
-  document.getElementById('pointsSpent').value = spent;
   document.getElementById('pointsRemaining').value = state.pointPool - spent;
 
   const rows = document.getElementById('abilityRows');
@@ -239,7 +243,7 @@ function renderAbilities() {
 
 function renderLevels() {
   const isHuman = state.raceGroup === 'Human';
-  const prog = Engine.computeProgression(DATA.classes.classes, state.levels, isHuman);
+  const prog = Engine.computeProgression(DATA.classes.classes, state.levels, isHuman, state.hpRolls);
   const finals = finalAbilities();
   const intMod = Engine.abilityModifier(finals.INT);
 
@@ -251,6 +255,12 @@ function renderLevels() {
     const chips = r.featSlots.map(s =>
       `<div class="feat-slot"><span class="tag">${s.pool}${s.source === 'human' ? ' (human)' : ''}</span></div>`
     ).join('');
+    const hpCell = r.charLevel <= 3
+      ? `<span class="num">${r.hpThisLevel}</span> <span class="h-note" style="margin:0;">(max)</span>`
+      : `<input type="number" min="1" max="${r.hitDie}" placeholder="${Engine.hpFloor(r.hitDie)}+"
+           data-hproll="${r.charLevel}" value="${state.hpRolls[r.charLevel] ?? ''}"
+           style="width:44px; text-align:center; padding:4px;" title="Roll a d${r.hitDie}. Enter it here — anything under ${Engine.hpFloor(r.hitDie)} is automatically raised to ${Engine.hpFloor(r.hitDie)}.">
+         <span class="num" style="color:var(--brass-bright); font-weight:600;">= ${r.hpThisLevel}</span>`;
     return `<tr class="stripe">
       <td><span class="lvl-badge">${r.charLevel}</span></td>
       <td><select data-lvl="${i}" class="clsSel">${clsOptions}</select></td>
@@ -259,7 +269,7 @@ function renderLevels() {
       <td class="num">${fmt(r.ref)}</td>
       <td class="num">${fmt(r.will)}</td>
       <td class="num">d${r.hitDie}</td>
-      <td class="num">${r.hpThisLevel}</td>
+      <td class="num">${hpCell}</td>
       <td class="num">${skillPts}</td>
       <td>${chips || '<span style="color:var(--muted)">—</span>'}</td>
     </tr>`;
@@ -268,6 +278,15 @@ function renderLevels() {
   body.querySelectorAll('.clsSel').forEach(sel => {
     sel.addEventListener('change', e => {
       state.levels[parseInt(e.target.dataset.lvl, 10)] = e.target.value;
+      renderAll();
+    });
+  });
+  body.querySelectorAll('input[data-hproll]').forEach(inp => {
+    inp.addEventListener('input', e => {
+      const lvl = parseInt(e.target.dataset.hproll, 10);
+      const val = e.target.value === '' ? null : parseInt(e.target.value, 10);
+      if (val == null) delete state.hpRolls[lvl];
+      else state.hpRolls[lvl] = val;
       renderAll();
     });
   });
@@ -297,7 +316,7 @@ function renderFeats(prog) {
   let html = '';
   prog.forEach(r => {
     if (!r.featSlots.length) return;
-    html += `<div class="mt16"><span class="pill brass">Level ${r.charLevel}</span></div>`;
+    html += `<div class="mt8"><span class="pill brass">Level ${r.charLevel}</span></div>`;
     r.featSlots.forEach((slot, idx) => {
       const slotKey = `L${r.charLevel}-${slot.pool}-${idx}`;
       const fstate = buildFeatState(prog, r.charLevel);

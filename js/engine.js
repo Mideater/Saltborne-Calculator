@@ -38,7 +38,23 @@ const Engine = (() => {
     ABILS.forEach(a => {
       out[a] = baseScores[a] + (raceMods[a] || 0) + (saltMods[a] || 0) + (overrides[a] || 0);
     });
+    // Saltborne's STR bonus is explicitly capped at 20 total "at creation" per the wiki.
+    if (saltborneApplied && saltMods.STR && out.STR > 20) {
+      out.STR = 20;
+    }
     return out;
+  }
+
+  /**
+   * How much of Saltborne's STR bonus (if any) gets wasted by the 20 cap.
+   * Returns 0 if not applicable or nothing is wasted.
+   */
+  function saltborneWastedStr(baseScores, racesData, raceGroup, subrace, overrides = {}) {
+    if (!racesData.saltborneTemplate || !racesData.saltborneTemplate.mods.STR) return 0;
+    const raceMods = raceAbilityMods(racesData, raceGroup, subrace);
+    const preSaltborneStr = baseScores.STR + (raceMods.STR || 0) + (overrides.STR || 0);
+    const uncappedWithSalt = preSaltborneStr + racesData.saltborneTemplate.mods.STR;
+    return uncappedWithSalt > 20 ? uncappedWithSalt - 20 : 0;
   }
 
   function totalEcl(racesData, raceGroup, subrace, saltborneApplied) {
@@ -64,13 +80,35 @@ const Engine = (() => {
   }
 
   /**
+   * Haze's HP rule: character levels 1-3 (not class levels — character
+   * levels) always get MAXIMUM hit die. From character level 4 onward you
+   * roll, but if the roll comes in under half the die (rounded up), you get
+   * that half-value instead — so a d10 can never give you less than 5, a
+   * d12 never less than 6, etc.
+   * rolledValue: the value the player entered for this level, or null/undefined
+   * if they haven't entered one yet (falls back to the guaranteed floor).
+   */
+  function hpForCharacterLevel(charLevel, hitDie, rolledValue) {
+    if (charLevel <= 3) return hitDie;
+    const floor = Math.ceil(hitDie / 2);
+    if (rolledValue == null || rolledValue === '') return floor;
+    const clamped = Math.max(1, Math.min(hitDie, rolledValue));
+    return Math.max(clamped, floor);
+  }
+
+  function hpFloor(hitDie) {
+    return Math.ceil(hitDie / 2);
+  }
+
+  /**
    * Walks a 6-level plan (array of class names, one per character level)
    * and returns per-level cumulative BAB/saves/HP/skill points.
    * classesData = the parsed classes.json .classes object
    * levelPlan = ["Fighter","Fighter","Rogue","Rogue","Rogue","Rogue"] etc (length 6)
    * isHuman = whether the character gets the human bonus feat at level 1
+   * hpRolls = { 4: 7, 5: null, 6: 3 } — player-entered rolls for levels 4-6
    */
-  function computeProgression(classesData, levelPlan, isHuman) {
+  function computeProgression(classesData, levelPlan, isHuman, hpRolls = {}) {
     const rows = [];
     const classLevelCount = {};
 
@@ -96,8 +134,7 @@ const Engine = (() => {
         will += saveForLevel(d.saves.will, n);
       });
 
-      const avgHD = Math.floor(def.hitDie / 2) + 1;
-      const hpThisLevel = charLevel === 1 ? def.hitDie : avgHD;
+      const hpThisLevel = hpForCharacterLevel(charLevel, def.hitDie, hpRolls[charLevel]);
 
       const skillMultiplier = charLevel === 1 ? 4 : 1;
       const skillPtsThisLevel = def.skillPoints; // + INT mod, applied by caller once final abilities are known
@@ -232,6 +269,7 @@ const Engine = (() => {
 
   function poolMatchesCategory(pool, feat, bonusPoolsData) {
     if (!bonusPoolsData) return true; // safety fallback if data failed to load
+    if (bonusPoolsData.neverPickable && bonusPoolsData.neverPickable.names.includes(feat.name)) return false;
 
     if (pool === 'general') {
       return bonusPoolsData.generalPoolCategories.includes(feat.category);
@@ -280,8 +318,8 @@ const Engine = (() => {
   return {
     ABILS, PB_COST,
     abilityModifier, pointBuyCost,
-    raceAbilityMods, finalAbilityScores, totalEcl,
-    babForLevel, saveForLevel, computeProgression,
+    raceAbilityMods, finalAbilityScores, totalEcl, saltborneWastedStr,
+    babForLevel, saveForLevel, computeProgression, hpForCharacterLevel, hpFloor,
     skillPointsForRow, totalSkillPoints, maxRanks, classSkillSet,
     meetsPrereqs, eligibleFeatsForSlot, poolMatchesCategory, autoGrantedFeatureNames, autoGrantedFeatIds, grantedProficiencies,
   };
