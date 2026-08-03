@@ -16,9 +16,13 @@ js/
                         listens for clicks/typing, calls Engine for numbers.
 data/
   races.json        <- every race/subrace, ability mods, traits
-  classes.json       <- every class, BAB/save progression, skill points, features
+  classes.json       <- every class, BAB/save progression, skill points, features,
+                        proficiencyGrants + autoFeatures (what's auto-granted, not chosen)
   feats.json         <- all 626 feats from the real game data, with real
                         prerequisites (this is the good stuff you found)
+  bonus-pools.json    <- which feats are eligible for each class's bonus-feat
+                        slot (Fighter combat feats, Cleric divine feats, etc.)
+                        — this is what stops a Fighter from seeing Ranger feats
   skills.json         <- skill list + what changed from vanilla NWN
   domains.json        <- cleric domains + deity list
   invocations.json     <- warlock invocations
@@ -108,30 +112,34 @@ scores) is tested against the real data and works correctly for any
 combination of the 13 classes across 6 levels, including multiclassing.
 The feat prerequisite checker uses the *actual* game data — abilities, BAB,
 class+level, required feats, skill ranks — pulled straight from the API
-export, which is far more reliable than anything scraped from the wiki.
+export. Bonus-feat pools are now curated per class (`bonus-pools.json`), so
+a Fighter no longer sees Ranger-only feats, and racial/chassis features
+(like Barbarian Fast Movement) don't show up as fake "choices." Auto-granted
+class features (proficiencies, Turn Undead, etc.) correctly satisfy OTHER
+feats' prerequisites even though they were never explicitly picked — e.g. a
+Paladin's auto-granted Turn Undead now correctly unlocks Divine Might.
+Human has all 25 regional subraces. Saltborne is a proper overlay template
+that can apply to any of its 9 eligible base subraces (not a separate race).
+Deity and Cleric domain selection are wired to the real domain/deity data.
 
 **Needs work, in rough priority order:**
 
-1. **Bonus feat pools aren't narrowed yet.** Right now every bonus-feat
-   slot (Fighter's combat feats, Cleric's divine feats, Barbarian's rage
-   feats, etc.) shows *every* feat you qualify for, not just the themed
-   subset for that class. The `poolMatchesCategory()` function in
-   `engine.js` is where this gets fixed — it currently just returns `true`
-   for everything. You'd tighten it by category or by an explicit list of
-   feat IDs per pool.
-2. **Domain-gated cleric feats can't currently be satisfied.** The feat
-   export references "domain power" feats (like Magic Domain Powers)
-   inside other feats' prerequisites, but those domain feats were never
-   included as their own entries in the export. A real fix means teaching
-   the engine to check "does this character have domain X" against
-   `domains.json` directly, rather than checking for a feat that doesn't
-   exist in the data.
-3. **Races and classes still have some `verified: false` / unconfirmed
-   spots** — flagged in the JSON with notes about what to check in-game.
+1. **`bonus-pools.json` is hand-curated and may have gaps.** I built each
+   pool from what we'd already confirmed in the Classes doc, cross-checked
+   against real feat names — but if a class's bonus feat list is missing
+   something, that's the file to fix. Same format either way: add a name to
+   `names`, or a prefix to `namePrefixes` for chains like Monk Paths.
+2. **Some source data has real gaps, not bugs on this end.** A few Cleric/
+   Paladin feats reference "domain power" feats in their prerequisites that
+   were never included as standalone entries in the export — those can
+   currently never be satisfied. Worth fixing by teaching the engine to
+   check domain membership against `domains.json` directly instead.
+3. **Races and classes still have some `verified: false` spots** — flagged
+   in the JSON with notes about what to check in-game.
 4. **No spell system** — deliberately skipped per your earlier call.
-5. **Skills list may be incomplete** — `skills.json` only documents skills
-   confirmed *changed* from vanilla; a few (Alchemy, Appraise, Bluff, Ride)
-   are marked `unconfirmed: true` since they were never directly verified.
+5. **Skills list may be incomplete** — a few skills are marked
+   `unconfirmed: true` since they were never directly verified as changed
+   or unchanged from vanilla.
 
 None of these block the calculator from working today — they're refinement
 passes for later, and every one of them is a data-file or engine-function
