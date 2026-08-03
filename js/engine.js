@@ -80,6 +80,17 @@ const Engine = (() => {
   }
 
   /**
+   * Formats a BAB total the standard D&D way, showing extra attacks at
+   * +6, +11, +16... e.g. a BAB of 6 displays as "+6/+1", not just "+6".
+   */
+  function babDisplay(bab) {
+    if (bab < 6) return (bab >= 0 ? '+' : '') + bab;
+    const attacks = [];
+    for (let a = bab; a > 0; a -= 5) attacks.push('+' + a);
+    return attacks.join('/');
+  }
+
+  /**
    * Haze's HP rule: character levels 1-3 (not class levels — character
    * levels) always get MAXIMUM hit die. From character level 4 onward you
    * roll, but if the roll comes in under half the die (rounded up), you get
@@ -319,7 +330,7 @@ const Engine = (() => {
     ABILS, PB_COST,
     abilityModifier, pointBuyCost,
     raceAbilityMods, finalAbilityScores, totalEcl, saltborneWastedStr,
-    babForLevel, saveForLevel, computeProgression, hpForCharacterLevel, hpFloor,
+    babForLevel, saveForLevel, babDisplay, computeProgression, hpForCharacterLevel, hpFloor,
     skillPointsForRow, totalSkillPoints, maxRanks, classSkillSet,
     meetsPrereqs, eligibleFeatsForSlot, poolMatchesCategory, autoGrantedFeatureNames, autoGrantedFeatIds, grantedProficiencies,
   };

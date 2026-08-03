@@ -843,6 +843,6 @@
       "Subrace power: Crushing Deluge 1/day",
       "5/- Negative Energy damage reduction"
     ],
-    "notes": "STR capped at 20 at creation. Flavor text implies an additional mental malus but it's not numerically confirmed \u2014 check in-game before assuming a penalty exists. Only selectable on subraces flagged saltborneEligible:true \u2014 applying it uses the BASE subrace's stats plus these, never a picked subrace's own special bonuses (e.g. picking 'Saltborne' over Sun Elf still only gives you Moon Elf's stats, not Sun Elf's)."
+    "notes": "STR capped at 20 at creation."
   }
 }

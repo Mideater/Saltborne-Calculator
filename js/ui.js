@@ -208,14 +208,13 @@ function renderAbilities() {
     const f = finals[a];
     const m = Engine.abilityModifier(f);
     const base = state.base[a];
-    return `<div class="grid" style="grid-template-columns:80px 32px 60px 32px 40px 50px 50px; align-items:center; padding:6px 0; gap:6px;">
-      <b>${a}</b>
+    const raceModText = mods[a] ? ` (race ${fmt(mods[a])})` : '';
+    return `<div class="abil-row">
+      <b class="abil-name">${a}</b>
       <button type="button" class="btn small" data-step="-1" data-abil="${a}" ${base <= 8 ? 'disabled' : ''}>−</button>
-      <span class="num" style="font-size:16px;">${base}</span>
+      <span class="num abil-base">${base}</span>
       <button type="button" class="btn small" data-step="1" data-abil="${a}" ${base >= 18 ? 'disabled' : ''}>+</button>
-      <span class="num">${mods[a] ? fmt(mods[a]) : '—'}</span>
-      <span class="num" style="color:var(--brass-bright); font-weight:600;">${f}</span>
-      <span class="num">${fmt(m)}</span>
+      <span class="num abil-final" title="Base ${base}${raceModText}">${f} <span class="abil-mod">${fmt(m)}</span></span>
     </div>`;
   }).join('');
   rows.querySelectorAll('button[data-step]').forEach(btn => {
@@ -264,7 +263,7 @@ function renderLevels() {
     return `<tr class="stripe">
       <td><span class="lvl-badge">${r.charLevel}</span></td>
       <td><select data-lvl="${i}" class="clsSel">${clsOptions}</select></td>
-      <td class="num">${fmt(r.bab)}</td>
+      <td class="num">${Engine.babDisplay(r.bab)}</td>
       <td class="num">${fmt(r.fort)}</td>
       <td class="num">${fmt(r.ref)}</td>
       <td class="num">${fmt(r.will)}</td>
@@ -392,7 +391,7 @@ function renderSkills(prog) {
 function renderSummary(prog) {
   const last = prog[prog.length - 1];
   const finals = finalAbilities();
-  document.getElementById('sumBAB').textContent = fmt(last.bab);
+  document.getElementById('sumBAB').textContent = Engine.babDisplay(last.bab);
   document.getElementById('sumFort').textContent = fmt(last.fort);
   document.getElementById('sumRef').textContent = fmt(last.ref);
   document.getElementById('sumWill').textContent = fmt(last.will);

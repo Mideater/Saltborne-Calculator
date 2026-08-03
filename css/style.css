@@ -55,6 +55,21 @@ details{ font-size: 12.5px; }
 details summary{ cursor: pointer; color: var(--tide-bright); font-family:'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
 details[open] summary{ margin-bottom: 4px; }
 
+.abil-row{
+  display: grid;
+  grid-template-columns: 30px 22px 26px 22px 1fr;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--line);
+}
+.abil-row:last-child{ border-bottom: none; }
+.abil-name{ font-size: 12.5px; color: var(--brass-bright); }
+.abil-base{ font-size: 13px; }
+.abil-final{ text-align: right; font-family:'JetBrains Mono', monospace; font-size: 13px; color: var(--brass-bright); font-weight: 600; cursor: help; }
+.abil-mod{ color: var(--tide-bright); font-weight: 500; margin-left: 3px; }
+.btn.small{ padding: 2px 8px; font-size: 12px; min-width: 22px; }
+
 .summary-stat.small{ padding: 8px 6px; }
 .summary-stat.small .label{ font-size: 9px; }
 .summary-stat.small .value{ font-size: 20px; margin-top: 2px; }

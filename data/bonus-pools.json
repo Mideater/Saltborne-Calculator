@@ -8,9 +8,10 @@
       "Blindsight, 5 foot radius", "Blindsight, 10 foot radius", "Blindsight, 60 foot radius",
       "Magical Fortitude",
       "Weapon Proficiency (bard)", "Weapon Proficiency (druid)", "Weapon Proficiency (monk)", "Weapon Proficiency (rogue)", "Weapon Proficiency (wizard)",
-      "Weapon Proficiency (Elf)", "Weapon Proficiency (dwarf)", "Weapon Proficiency (orc)"
+      "Weapon Proficiency (Elf)", "Weapon Proficiency (dwarf)", "Weapon Proficiency (orc)",
+      "Damage Reduction 1", "Damage Reduction 2"
     ],
-    "notes": "Blindsight (10 foot radius) specifically comes bundled with the Warlock invocation Voidsense — it's never picked as its own feat. Damage Reduction 1/2 are also excluded, but via Warlock's autoFeatures in classes.json instead of here, since they ARE granted (just automatically, at levels 3/5) rather than being meaningless."
+    "notes": "Blindsight (10 foot radius) specifically comes bundled with the Warlock invocation Voidsense — it's never picked as its own feat. Damage Reduction 1/2 are Warlock-only chassis (auto-granted at levels 3/5) — they carry no real class-lock in the raw data (tagged 'Defensive' with zero prereqs, so without this exclusion ANY class could pick them), so they're excluded globally here and separately tracked in Warlock's autoFeatures so they still count toward any other feat's prerequisites."
   },
   "pools": {
     "fighterCombat": {
