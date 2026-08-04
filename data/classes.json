@@ -13,14 +13,19 @@
       },
       "skillPoints": 5,
       "classSkills": [
-        "Animal Empathy",
         "Discipline",
         "Heal",
         "Listen",
-        "Parry",
         "Spot",
+        "Taunt",
+        "Influence",
+        "Parry",
         "Survival",
-        "Taunt"
+        "Knowledge: Arcane",
+        "Knowledge: Architecture",
+        "Knowledge: General",
+        "Knowledge: Nature",
+        "Knowledge: Religion"
       ],
       "bonusFeatLevels": {
         "levels": [
@@ -62,24 +67,21 @@
       "classSkills": [
         "Concentration",
         "Discipline",
-        "Disable Device",
-        "Hide",
         "Listen",
+        "Spot",
+        "Use Magic Device",
+        "Acrobatics",
+        "Hide",
+        "Move Silently",
+        "Influence",
+        "Parry",
+        "Perform",
+        "Spellcraft",
         "Knowledge: Arcane",
         "Knowledge: Architecture",
         "Knowledge: General",
         "Knowledge: Nature",
-        "Knowledge: Religion",
-        "Move Silently",
-        "Parry",
-        "Perform",
-        "Influence",
-        "Pick Pocket",
-        "Search",
-        "Spellcraft",
-        "Spot",
-        "Acrobatics",
-        "Use Magic Device"
+        "Knowledge: Religion"
       ],
       "bonusFeatLevels": {
         "levels": [],
@@ -122,14 +124,14 @@
         "Concentration",
         "Discipline",
         "Heal",
+        "Influence",
+        "Parry",
+        "Spellcraft",
         "Knowledge: Arcane",
         "Knowledge: Architecture",
         "Knowledge: General",
         "Knowledge: Nature",
-        "Knowledge: Religion",
-        "Parry",
-        "Influence",
-        "Spellcraft"
+        "Knowledge: Religion"
       ],
       "bonusFeatLevels": {
         "levels": [
@@ -167,7 +169,17 @@
       "classSkills": [
         "Discipline",
         "Listen",
-        "Spot"
+        "Spot",
+        "Hide",
+        "Move Silently",
+        "Influence",
+        "Parry",
+        "Survival",
+        "Knowledge: Arcane",
+        "Knowledge: Architecture",
+        "Knowledge: General",
+        "Knowledge: Nature",
+        "Knowledge: Religion"
       ],
       "bonusFeatLevels": {
         "levels": [
@@ -205,18 +217,19 @@
       },
       "skillPoints": 5,
       "classSkills": [
-        "Animal Empathy",
         "Concentration",
         "Discipline",
         "Heal",
+        "Animal Empathy",
+        "Influence",
+        "Parry",
+        "Spellcraft",
+        "Survival",
         "Knowledge: Arcane",
         "Knowledge: Architecture",
         "Knowledge: General",
         "Knowledge: Nature",
-        "Knowledge: Religion",
-        "Parry",
-        "Spellcraft",
-        "Survival"
+        "Knowledge: Religion"
       ],
       "bonusFeatLevels": {
         "levels": [
@@ -260,8 +273,14 @@
       "skillPoints": 3,
       "classSkills": [
         "Discipline",
+        "Taunt",
+        "Influence",
         "Parry",
-        "Taunt"
+        "Knowledge: Arcane",
+        "Knowledge: Architecture",
+        "Knowledge: General",
+        "Knowledge: Nature",
+        "Knowledge: Religion"
       ],
       "bonusFeatLevels": {
         "levels": [
@@ -301,18 +320,18 @@
         "Concentration",
         "Discipline",
         "Heal",
-        "Hide",
         "Listen",
+        "Spot",
+        "Acrobatics",
+        "Hide",
+        "Move Silently",
+        "Influence",
+        "Parry",
         "Knowledge: Arcane",
         "Knowledge: Architecture",
         "Knowledge: General",
         "Knowledge: Nature",
-        "Knowledge: Religion",
-        "Move Silently",
-        "Parry",
-        "Perform",
-        "Spot",
-        "Acrobatics"
+        "Knowledge: Religion"
       ],
       "bonusFeatLevels": {
         "levels": [
@@ -363,13 +382,13 @@
         "Concentration",
         "Discipline",
         "Heal",
+        "Influence",
+        "Parry",
         "Knowledge: Arcane",
         "Knowledge: Architecture",
         "Knowledge: General",
         "Knowledge: Nature",
-        "Knowledge: Religion",
-        "Parry",
-        "Influence"
+        "Knowledge: Religion"
       ],
       "bonusFeatLevels": {
         "levels": [
@@ -413,22 +432,23 @@
       },
       "skillPoints": 6,
       "classSkills": [
-        "Animal Empathy",
         "Concentration",
         "Discipline",
         "Heal",
-        "Hide",
         "Listen",
+        "Spot",
+        "Animal Empathy",
+        "Hide",
+        "Move Silently",
+        "Influence",
+        "Parry",
+        "Search",
+        "Survival",
         "Knowledge: Arcane",
         "Knowledge: Architecture",
         "Knowledge: General",
         "Knowledge: Nature",
-        "Knowledge: Religion",
-        "Move Silently",
-        "Parry",
-        "Search",
-        "Spot",
-        "Survival"
+        "Knowledge: Religion"
       ],
       "bonusFeatLevels": {
         "levels": [
@@ -485,26 +505,26 @@
       "skillPoints": 8,
       "classSkills": [
         "Discipline",
-        "Disable Device",
-        "Hide",
         "Listen",
+        "Open Lock",
+        "Spot",
+        "Taunt",
+        "Use Magic Device",
+        "Acrobatics",
+        "Disable Device",
+        "Set Device",
+        "Hide",
+        "Move Silently",
+        "Influence",
+        "Parry",
+        "Perform",
+        "Pick Pocket",
+        "Search",
         "Knowledge: Arcane",
         "Knowledge: Architecture",
         "Knowledge: General",
         "Knowledge: Nature",
-        "Knowledge: Religion",
-        "Move Silently",
-        "Open Lock",
-        "Parry",
-        "Perform",
-        "Influence",
-        "Pick Pocket",
-        "Search",
-        "Set Device",
-        "Spot",
-        "Taunt",
-        "Acrobatics",
-        "Use Magic Device"
+        "Knowledge: Religion"
       ],
       "bonusFeatLevels": {
         "levels": [
@@ -546,13 +566,14 @@
       "skillPoints": 3,
       "classSkills": [
         "Concentration",
+        "Influence",
+        "Parry",
+        "Spellcraft",
         "Knowledge: Arcane",
         "Knowledge: Architecture",
         "Knowledge: General",
         "Knowledge: Nature",
-        "Knowledge: Religion",
-        "Influence",
-        "Spellcraft"
+        "Knowledge: Religion"
       ],
       "bonusFeatLevels": {
         "levels": [],
@@ -589,15 +610,14 @@
       "classSkills": [
         "Concentration",
         "Heal",
+        "Use Magic Device",
         "Influence",
+        "Parry",
         "Knowledge: Arcane",
         "Knowledge: Architecture",
         "Knowledge: General",
         "Knowledge: Nature",
-        "Knowledge: Religion",
-        "Perform",
-        "Spellcraft",
-        "Use Magic Device"
+        "Knowledge: Religion"
       ],
       "bonusFeatLevels": {
         "levels": [],
@@ -643,12 +663,14 @@
       "skillPoints": 3,
       "classSkills": [
         "Concentration",
+        "Influence",
+        "Parry",
+        "Spellcraft",
         "Knowledge: Arcane",
         "Knowledge: Architecture",
         "Knowledge: General",
         "Knowledge: Nature",
-        "Knowledge: Religion",
-        "Spellcraft"
+        "Knowledge: Religion"
       ],
       "bonusFeatLevels": {
         "levels": [
