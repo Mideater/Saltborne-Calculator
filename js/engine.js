@@ -199,6 +199,32 @@ const Engine = (() => {
     return set;
   }
 
+  /**
+   * The class skill list for ONLY the single class taken at a specific
+   * character level — this is what determines whether a skill point spent
+   * AT THAT LEVEL costs 1 (class) or 2 (cross-class). This deliberately
+   * does NOT look at other levels: NWN/3.5 multiclass skill costing is
+   * based on the class you're leveling up in at that moment, not your
+   * full class history — so a skill can be a class skill at level 2
+   * (taken via Bard) and cross-class again at level 3 (back to Fighter),
+   * even though you "know" it from level 2 onward.
+   */
+  function classSkillsForLevel(classesData, levelPlan, charLevel) {
+    const cls = levelPlan[charLevel - 1];
+    const def = classesData[cls];
+    return new Set(def && def.classSkills ? def.classSkills : []);
+  }
+
+  /**
+   * Cumulative union of class skills across every class taken up to and
+   * including a given character level. Used for the max-RANK cap, which
+   * (unlike the per-level cost) uses "is this a class skill for ANY class
+   * you've ever had," not just your current level's class.
+   */
+  function classSkillSetUpTo(classesData, levelPlan, upToCharLevel) {
+    return classSkillSet(classesData, levelPlan.slice(0, upToCharLevel));
+  }
+
   // ---- Feats ----
 
   /**
@@ -331,7 +357,7 @@ const Engine = (() => {
     abilityModifier, pointBuyCost,
     raceAbilityMods, finalAbilityScores, totalEcl, saltborneWastedStr,
     babForLevel, saveForLevel, babDisplay, computeProgression, hpForCharacterLevel, hpFloor,
-    skillPointsForRow, totalSkillPoints, maxRanks, classSkillSet,
+    skillPointsForRow, totalSkillPoints, maxRanks, classSkillSet, classSkillsForLevel, classSkillSetUpTo,
     meetsPrereqs, eligibleFeatsForSlot, poolMatchesCategory, autoGrantedFeatureNames, autoGrantedFeatIds, grantedProficiencies,
   };
 })();

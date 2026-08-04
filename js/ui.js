@@ -21,7 +21,7 @@ const state = {
   levels: ['Fighter', 'Fighter', 'Fighter', 'Fighter', 'Fighter', 'Fighter'],
   hpRolls: {}, // charLevel (4,5,6) -> rolled value, or absent = "use the guaranteed floor"
   featChoices: {},   // slotKey -> feat id
-  skillRanks: {},    // skill name -> ranks
+  skillPointsByLevel: { 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} }, // charLevel -> { skillName: ranksAddedAtThisLevel }
 };
 
 function fmt(n) { return (n >= 0 ? '+' : '') + n; }
@@ -295,7 +295,21 @@ function renderLevels() {
 
 /* ---------------- FEATS ---------------- */
 
-function buildFeatState(prog, upToCharLevel) {
+function totalRanksForSkillUpTo(skillName, uptoCharLevel) {
+  let total = 0;
+  for (let lvl = 1; lvl <= uptoCharLevel; lvl++) {
+    total += (state.skillPointsByLevel[lvl] && state.skillPointsByLevel[lvl][skillName]) || 0;
+  }
+  return total;
+}
+
+function allSkillTotalsUpTo(uptoCharLevel) {
+  const totals = {};
+  DATA.skills.skills.forEach(sk => { totals[sk.name] = totalRanksForSkillUpTo(sk.name, uptoCharLevel); });
+  return totals;
+}
+
+function buildFeatState(prog, upToCharLevel, excludeSlotKey) {
   const classLevels = {};
   let bab = 0;
   prog.forEach(r => {
@@ -305,9 +319,11 @@ function buildFeatState(prog, upToCharLevel) {
     }
   });
   const featIdsTaken = new Set();
-  Object.values(state.featChoices).forEach(id => { if (id) featIdsTaken.add(parseInt(id, 10)); });
+  Object.entries(state.featChoices).forEach(([slotKey, id]) => {
+    if (id && slotKey !== excludeSlotKey) featIdsTaken.add(parseInt(id, 10));
+  });
   const grantedProficiencies = Engine.autoGrantedFeatureNames(DATA.classes.classes, state.levels, upToCharLevel);
-  return { bab, classLevels, finalAbilities: finalAbilities(), featIdsTaken, skillRanks: state.skillRanks, grantedProficiencies };
+  return { bab, classLevels, finalAbilities: finalAbilities(), featIdsTaken, skillRanks: allSkillTotalsUpTo(upToCharLevel), grantedProficiencies };
 }
 
 function renderFeats(prog) {
@@ -318,7 +334,7 @@ function renderFeats(prog) {
     html += `<div class="mt8"><span class="pill brass">Level ${r.charLevel}</span></div>`;
     r.featSlots.forEach((slot, idx) => {
       const slotKey = `L${r.charLevel}-${slot.pool}-${idx}`;
-      const fstate = buildFeatState(prog, r.charLevel);
+      const fstate = buildFeatState(prog, r.charLevel, slotKey);
       const eligible = Engine.eligibleFeatsForSlot(DATA.feats.feats, slot.pool, fstate, DATA.bonusPools)
         .sort((a, b) => a.name.localeCompare(b.name));
       const current = state.featChoices[slotKey] || '';
@@ -326,8 +342,11 @@ function renderFeats(prog) {
         eligible.map(f => `<option value="${f.id}" ${String(f.id) === String(current) ? 'selected' : ''}>${f.name}</option>`).join('');
       const chosen = eligible.find(f => String(f.id) === String(current)) ||
         DATA.feats.feats.find(f => String(f.id) === String(current));
+      const slotLabel = slot.pool === 'general'
+        ? (slot.source === 'human' ? 'General Feat — Human Bonus' : 'General Feat')
+        : `${slot.class} Bonus Feat`;
       html += `<div class="feat-slot">
-        <div class="tag">${slot.pool}${slot.source === 'human' ? ' — human bonus' : ''}</div>
+        <div class="tag">${slotLabel}</div>
         <select data-slot="${slotKey}" class="featSel mt8">${opts}</select>
         ${chosen ? `<div class="h-note" style="white-space:pre-wrap; margin:6px 0 0 0;">${chosen.description}</div>` : ''}
       </div>`;
@@ -348,39 +367,80 @@ function renderSkills(prog) {
   const finals = finalAbilities();
   const intMod = Engine.abilityModifier(finals.INT);
   const totalPts = Engine.totalSkillPoints(prog, intMod);
-  const classSkills = Engine.classSkillSet(DATA.classes.classes, state.levels);
-  const charLevel = state.levels.length;
+  const finalClassSkills = Engine.classSkillSet(DATA.classes.classes, state.levels);
+  const charLevelMax = state.levels.length;
 
-  let spent = 0;
-  const body = document.getElementById('skillBody');
-  body.innerHTML = DATA.skills.skills.map(sk => {
-    const isClass = classSkills.has(sk.name);
-    const max = Engine.maxRanks(charLevel, isClass);
-    const ranks = Math.min(state.skillRanks[sk.name] || 0, max);
-    state.skillRanks[sk.name] = ranks;
-    spent += isClass ? ranks : ranks * 2;
-    const abilMod = Engine.abilityModifier(finals[sk.keyAbility]);
-    return `<tr class="stripe">
-      <td>${sk.name}${sk.unconfirmed ? ' <span class="pill warn">unconfirmed</span>' : ''}</td>
-      <td class="num">${sk.keyAbility}</td>
-      <td class="num">${isClass ? 'Class' : 'Cross'}</td>
-      <td class="num"><input type="number" min="0" max="${max}" value="${ranks}" data-skill="${sk.name}" style="width:50px;text-align:center;"></td>
-      <td class="num">${max}</td>
-      <td class="num">${fmt(abilMod)}</td>
-      <td class="num" style="color:var(--brass-bright);font-weight:600;">${fmt(ranks + abilMod)}</td>
-    </tr>`;
-  }).join('');
+  // Build per-level panels
+  const panelsContainer = document.getElementById('skillLevelPanels');
+  let panelsHtml = '';
+  let totalSpent = 0;
 
-  body.querySelectorAll('input[data-skill]').forEach(inp => {
+  prog.forEach(r => {
+    const lvl = r.charLevel;
+    const ptsAvailable = Engine.skillPointsForRow(r, intMod);
+    const classSkillsThisLevel = Engine.classSkillsForLevel(DATA.classes.classes, state.levels, lvl);
+    const classSkillsCumulative = Engine.classSkillSetUpTo(DATA.classes.classes, state.levels, lvl);
+    const levelAlloc = state.skillPointsByLevel[lvl] || {};
+    let spentAtLevel = 0;
+    const rows = DATA.skills.skills.map(sk => {
+      const isClass = classSkillsThisLevel.has(sk.name);
+      const ranksHere = levelAlloc[sk.name] || 0;
+      const cost = isClass ? ranksHere : ranksHere * 2;
+      spentAtLevel += cost;
+      const totalSoFar = totalRanksForSkillUpTo(sk.name, lvl);
+      const cap = Engine.maxRanks(lvl, classSkillsCumulative.has(sk.name));
+      return `<tr class="stripe">
+        <td>${sk.name}</td>
+        <td class="num">${isClass ? '<span class="pill brass">class</span>' : '<span class="pill">cross</span>'}</td>
+        <td class="num"><input type="number" min="0" max="20" value="${ranksHere}" data-skill-lvl="${lvl}" data-skill-name="${sk.name}" style="width:42px; text-align:center; padding:3px;"></td>
+        <td class="num" style="color:var(--muted); font-size:11px;">${totalSoFar}/${cap} total</td>
+      </tr>`;
+    }).join('');
+    totalSpent += spentAtLevel;
+    const overBudget = spentAtLevel > ptsAvailable;
+    panelsHtml += `<details class="skill-level-panel" ${lvl === charLevelMax ? 'open' : ''}>
+      <summary>Level ${lvl} — ${r.cls} <span style="color:${overBudget ? 'var(--bad)' : 'var(--tide-bright)'};">(${spentAtLevel}/${ptsAvailable} pts)</span></summary>
+      <div class="mt8" style="overflow-x:auto;">
+        <table>
+          <thead><tr><th>Skill</th><th class="num">Type</th><th class="num">Ranks added</th><th class="num">Running total</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
+      ${overBudget ? '<div class="warn-line bad mt8">Over budget for this level — reduce ranks above.</div>' : ''}
+    </details>`;
+  });
+  panelsContainer.innerHTML = panelsHtml;
+  panelsContainer.querySelectorAll('input[data-skill-lvl]').forEach(inp => {
     inp.addEventListener('input', e => {
-      state.skillRanks[e.target.dataset.skill] = parseInt(e.target.value || '0', 10);
+      const lvl = parseInt(e.target.dataset.skillLvl, 10);
+      const name = e.target.dataset.skillName;
+      const val = parseInt(e.target.value || '0', 10);
+      if (!state.skillPointsByLevel[lvl]) state.skillPointsByLevel[lvl] = {};
+      if (val > 0) state.skillPointsByLevel[lvl][name] = val;
+      else delete state.skillPointsByLevel[lvl][name];
       renderAll();
     });
   });
 
+  // Final summary table (totals across all levels, using FINAL class-skill status for the modifier display)
+  const body = document.getElementById('skillBody');
+  body.innerHTML = DATA.skills.skills.map(sk => {
+    const isClassFinal = finalClassSkills.has(sk.name);
+    const total = totalRanksForSkillUpTo(sk.name, charLevelMax);
+    const abilMod = Engine.abilityModifier(finals[sk.keyAbility]);
+    return `<tr class="stripe">
+      <td>${sk.name}${sk.unconfirmed ? ' <span class="pill warn">unconfirmed</span>' : ''}</td>
+      <td class="num">${sk.keyAbility}</td>
+      <td class="num">${isClassFinal ? 'Class' : 'Cross'}</td>
+      <td class="num">${total}</td>
+      <td class="num">${fmt(abilMod)}</td>
+      <td class="num" style="color:var(--brass-bright); font-weight:600;">${fmt(total + abilMod)}</td>
+    </tr>`;
+  }).join('');
+
   document.getElementById('skillPtsTotal').textContent = totalPts;
-  document.getElementById('skillPtsSpent').textContent = spent;
-  const rem = totalPts - spent;
+  document.getElementById('skillPtsSpent').textContent = totalSpent;
+  const rem = totalPts - totalSpent;
   const remEl = document.getElementById('skillPtsRemaining');
   remEl.textContent = rem;
   remEl.style.color = rem < 0 ? 'var(--bad)' : 'var(--brass-bright)';

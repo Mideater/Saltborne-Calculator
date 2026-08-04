@@ -42,7 +42,10 @@
         "Weapon Proficiency (simple)"
       ],
       "autoFeatures": [
-        "Barbarian Fast Movement"
+        "Barbarian Fast Movement",
+        "Barbarian Rage",
+        "Barbarian Rage (1x per day)",
+        "Barbarian Rage (2x per day)"
       ]
     },
     "Bard": {

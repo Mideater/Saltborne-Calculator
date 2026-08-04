@@ -96,14 +96,17 @@
 
       <section class="card compact">
         <h2 class="h">Skills</h2>
+        <p class="h-note">Class/cross-class status is checked per level, matching how NWN actually works — a skill can be a class skill at one level and cross-class at another if you multiclass, but ranks you already bought always stay.</p>
         <div class="grid grid-3">
           <div class="summary-stat small"><div class="label">Earned</div><div class="value" id="skillPtsTotal">0</div></div>
           <div class="summary-stat small"><div class="label">Spent</div><div class="value" id="skillPtsSpent">0</div></div>
           <div class="summary-stat small"><div class="label">Left</div><div class="value" id="skillPtsRemaining">0</div></div>
         </div>
+        <div class="mt8" id="skillLevelPanels"></div>
+        <h3 class="h" style="font-size:13px; margin-top:14px;">Totals</h3>
         <div class="mt8" style="overflow-x:auto;">
           <table>
-            <thead><tr><th>Skill</th><th class="num">Key</th><th class="num">Type</th><th class="num">Ranks</th><th class="num">Max</th><th class="num">Mod</th><th class="num">Total</th></tr></thead>
+            <thead><tr><th>Skill</th><th class="num">Key</th><th class="num">Type</th><th class="num">Ranks</th><th class="num">Mod</th><th class="num">Total</th></tr></thead>
             <tbody id="skillBody"></tbody>
           </table>
         </div>

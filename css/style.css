@@ -73,6 +73,20 @@ details[open] summary{ margin-bottom: 4px; }
 .summary-stat.small{ padding: 8px 6px; }
 .summary-stat.small .label{ font-size: 9px; }
 .summary-stat.small .value{ font-size: 20px; margin-top: 2px; }
+
+.skill-level-panel{
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  background: rgba(0,0,0,0.15);
+}
+.skill-level-panel summary{
+  font-family: 'Spectral', serif; text-transform: none; letter-spacing: 0;
+  font-size: 13.5px; color: var(--brass-bright); font-weight: 600;
+}
+.skill-level-panel[open] summary{ margin-bottom: 6px; }
+.pill{ font-size: 10px; padding: 1px 7px; }
 .eyebrow{
   font-family:'JetBrains Mono', monospace;
   font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
