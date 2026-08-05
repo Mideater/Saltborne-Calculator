@@ -22,6 +22,7 @@ const state = {
   hpRolls: {}, // charLevel (4,5,6) -> rolled value, or absent = "use the guaranteed floor"
   featChoices: {},   // slotKey -> feat id
   skillPointsByLevel: { 1: {}, 2: {}, 3: {}, 4: {}, 5: {}, 6: {} }, // charLevel -> { skillName: ranksAddedAtThisLevel }
+  openSkillPanels: new Set([6]), // which per-level skill panels are expanded — persisted across re-renders
 };
 
 function fmt(n) { return (n >= 0 ? '+' : '') + n; }
@@ -233,7 +234,7 @@ function renderAbilities() {
   const below10 = Engine.ABILS.filter(a => finals[a] < 10).length;
   const maxAllowed = state.raceGroup === 'Half-Orc' ? 2 : 1;
   let w = '';
-  if (below10 > maxAllowed) w += `<div class="warn-line bad">${below10} scores below 10 — house rule allows at most ${maxAllowed} for this race.</div>`;
+  if (below10 > maxAllowed) w += `<div class="warn-line bad">${below10} scores below 10 — server rule allows at most ${maxAllowed} for this race.</div>`;
   if (spent > state.pointPool) w += `<div class="warn-line bad">Spent ${spent} points but your pool is ${state.pointPool}.</div>`;
   warn.innerHTML = w;
 }
@@ -389,16 +390,20 @@ function renderSkills(prog) {
       spentAtLevel += cost;
       const totalSoFar = totalRanksForSkillUpTo(sk.name, lvl);
       const cap = Engine.maxRanks(lvl, classSkillsCumulative.has(sk.name));
+      const ranksFromEarlierLevels = totalSoFar - ranksHere;
+      const maxHere = Math.max(0, cap - ranksFromEarlierLevels);
+      const atCap = totalSoFar >= cap;
       return `<tr class="stripe">
         <td>${sk.name}</td>
         <td class="num">${isClass ? '<span class="pill brass">class</span>' : '<span class="pill">cross</span>'}</td>
-        <td class="num"><input type="number" min="0" max="20" value="${ranksHere}" data-skill-lvl="${lvl}" data-skill-name="${sk.name}" style="width:42px; text-align:center; padding:3px;"></td>
-        <td class="num" style="color:var(--muted); font-size:11px;">${totalSoFar}/${cap} total</td>
+        <td class="num"><input type="number" min="0" max="${maxHere}" value="${ranksHere}" data-skill-lvl="${lvl}" data-skill-name="${sk.name}" style="width:42px; text-align:center; padding:3px;"></td>
+        <td class="num" style="color:${atCap ? 'var(--warn)' : 'var(--muted)'}; font-size:11px;">${totalSoFar}/${cap} total</td>
       </tr>`;
     }).join('');
     totalSpent += spentAtLevel;
     const overBudget = spentAtLevel > ptsAvailable;
-    panelsHtml += `<details class="skill-level-panel" ${lvl === charLevelMax ? 'open' : ''}>
+    const isOpen = state.openSkillPanels.has(lvl);
+    panelsHtml += `<details class="skill-level-panel" data-panel-lvl="${lvl}" ${isOpen ? 'open' : ''}>
       <summary>Level ${lvl} — ${r.cls} <span style="color:${overBudget ? 'var(--bad)' : 'var(--tide-bright)'};">(${spentAtLevel}/${ptsAvailable} pts)</span></summary>
       <div class="mt8" style="overflow-x:auto;">
         <table>
@@ -410,11 +415,23 @@ function renderSkills(prog) {
     </details>`;
   });
   panelsContainer.innerHTML = panelsHtml;
+  panelsContainer.querySelectorAll('details[data-panel-lvl]').forEach(det => {
+    det.addEventListener('toggle', () => {
+      const lvl = parseInt(det.dataset.panelLvl, 10);
+      if (det.open) state.openSkillPanels.add(lvl);
+      else state.openSkillPanels.delete(lvl);
+      // Deliberately no renderAll() here — toggling a panel shouldn't
+      // trigger a full re-render, just remember the state for next time.
+    });
+  });
   panelsContainer.querySelectorAll('input[data-skill-lvl]').forEach(inp => {
     inp.addEventListener('input', e => {
       const lvl = parseInt(e.target.dataset.skillLvl, 10);
       const name = e.target.dataset.skillName;
-      const val = parseInt(e.target.value || '0', 10);
+      const max = parseInt(e.target.max, 10);
+      let val = parseInt(e.target.value || '0', 10);
+      if (val > max) val = max;
+      if (val < 0) val = 0;
       if (!state.skillPointsByLevel[lvl]) state.skillPointsByLevel[lvl] = {};
       if (val > 0) state.skillPointsByLevel[lvl][name] = val;
       else delete state.skillPointsByLevel[lvl][name];
